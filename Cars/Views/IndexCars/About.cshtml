@@ -1,0 +1,46 @@
+﻿@model List<Tek.Cars.BusCars.Carro>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+    <nav>
+        <ul class="menu">
+            <li class="current"><a href="/IndexCars/Index" class="home"><img src="/images/home.jpg" alt=""></a></li>
+        </ul>
+        <div class="clear"></div>
+    </nav>
+    <section id="content">
+        <div class="sub-page">
+            <div class="sub-page-left">
+                <div class="slider-block">
+                    <div class="slider">
+                        <ul class="items">
+                            @foreach (Tek.Cars.BusCars.Carro item in Model)
+                            {
+                                <li>
+                                    <img src="@item.imagen_car" alt="">
+                                    <div class="banner">
+                                        <div>
+                                            <span>@item.nombre_marca</span><strong>@item.nombre_modelo</strong>
+                                            <p>@item.descripcion_car</p>
+                                            <a href="Actualizar" class="button">Actualizar</a>
+                                            <a href="Delete" class="button">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <a href="#" class="prev"></a> <a href="#" class="next"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>Car Repair &copy; 2045 | <a href="#">Privacy Policy</a> | Design by: <a href="http://www.templatemonster.com/">TemplateMonster.com</a></footer>
+</body>
+</html>
+
+

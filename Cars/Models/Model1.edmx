@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProductosModelNS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="id_grup" />
+          </Key>
+          <Property Name="id_grup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_grup" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="id_marca" />
+          </Key>
+          <Property Name="id_marca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_marca" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_grup_marca" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="id_prod" />
+          </Key>
+          <Property Name="id_prod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_prod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_marca_prod" Type="int" Nullable="false" />
+          <Property Name="id_grup_prod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usua" />
+          </Key>
+          <Property Name="id_usua" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_usua" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="pass_usua" Type="int" Nullable="false" />
+          <Property Name="estatus_usua" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Marca_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Marca" Type="Self.Marca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="id_grup" />
+            </Principal>
+            <Dependent Role="Marca">
+              <PropertyRef Name="id_grup_marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="id_grup" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="id_grup_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Marca">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="id_marca" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="id_marca_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProductosModelNSStoreContainer">
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Marca_Grupo" Association="Self.FK_Marca_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Marca" EntitySet="Marca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Grupo" Association="Self.FK_Producto_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Marca" Association="Self.FK_Producto_Marca">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProductosModelNS" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="id_grup" />
+          </Key>
+          <Property Name="id_grup" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_grup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Marca" Relationship="Self.FK_Marca_Grupo" FromRole="Grupo" ToRole="Marca" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Grupo" FromRole="Grupo" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="id_marca" />
+          </Key>
+          <Property Name="id_marca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_grup_marca" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grupo" Relationship="Self.FK_Marca_Grupo" FromRole="Marca" ToRole="Grupo" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Marca" FromRole="Marca" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="id_prod" />
+          </Key>
+          <Property Name="id_prod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_prod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_marca_prod" Type="Int32" Nullable="false" />
+          <Property Name="id_grup_prod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grupo" Relationship="Self.FK_Producto_Grupo" FromRole="Producto" ToRole="Grupo" />
+          <NavigationProperty Name="Marca" Relationship="Self.FK_Producto_Marca" FromRole="Producto" ToRole="Marca" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usua" />
+          </Key>
+          <Property Name="id_usua" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_usua" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass_usua" Type="Int32" Nullable="false" />
+          <Property Name="estatus_usua" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Marca_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Marca" Type="Self.Marca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="id_grup" />
+            </Principal>
+            <Dependent Role="Marca">
+              <PropertyRef Name="id_grup_marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="id_grup" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="id_grup_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Marca">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="id_marca" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="id_marca_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProductosEFEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Marca_Grupo" Association="Self.FK_Marca_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Marca" EntitySet="Marca" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Grupo" Association="Self.FK_Producto_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Marca" Association="Self.FK_Producto_Marca">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProductosModelNSStoreContainer" CdmEntityContainer="ProductosEFEntities">
+          <EntitySetMapping Name="Grupo">
+            <EntityTypeMapping TypeName="ProductosModelNS.Grupo">
+              <MappingFragment StoreEntitySet="Grupo">
+                <ScalarProperty Name="id_grup" ColumnName="id_grup" />
+                <ScalarProperty Name="nombre_grup" ColumnName="nombre_grup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="ProductosModelNS.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+                <ScalarProperty Name="nombre_marca" ColumnName="nombre_marca" />
+                <ScalarProperty Name="id_grup_marca" ColumnName="id_grup_marca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="ProductosModelNS.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="id_prod" ColumnName="id_prod" />
+                <ScalarProperty Name="nombre_prod" ColumnName="nombre_prod" />
+                <ScalarProperty Name="id_marca_prod" ColumnName="id_marca_prod" />
+                <ScalarProperty Name="id_grup_prod" ColumnName="id_grup_prod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ProductosModelNS.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="id_usua" ColumnName="id_usua" />
+                <ScalarProperty Name="nombre_usua" ColumnName="nombre_usua" />
+                <ScalarProperty Name="pass_usua" ColumnName="pass_usua" />
+                <ScalarProperty Name="estatus_usua" ColumnName="estatus_usua" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
