@@ -19,7 +19,9 @@ namespace Practica_Git.Models
         public int id_modelo_car { get; set; }
         public string descripcion_car { get; set; }
         public string imagen_car { get; set; }
-    
+        public string nombre_marca { get; set; }
+        public string nombre_modelo { get; set; }
+
         public virtual Marca Marca { get; set; }
         public virtual Modelo Modelo { get; set; }
     }
