@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Practica_Git.Models;
+using Practica_Git.Module;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,32 +12,87 @@ namespace Practica_Git.Controllers
     [RoutePrefix("api/carros")]
     public class ApiGitPracticeController : ApiController
     {
+        private CarrosEntities db = new CarrosEntities();
         [Route("")]
-        // GET: api/GitPractice
-        public IEnumerable<string> Get()
+        [Route(""), BasicAuthorize]
+        // GET: api/APICarros
+        public HttpResponseMessage GetCarros()
         {
-            return new string[] { "value1", "value2" };
+            var lst = db.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).ToList();
+
+            return Request.CreateResponse(HttpStatusCode.OK, lst);
+        }
+        [Route("marca")]
+        public HttpResponseMessage GetMarca()
+        {
+            var lst = db.Marca.Select(m => new { id_marca = m.id_marca, nombre_marca = m.nombre_marca }).ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, lst);
+        }
+        // GET: api/APICarros/5
+        //[ResponseType(typeof(Carro))]
+        [Route("{idp}")]
+        public HttpResponseMessage GetCarro(int idp)
+        {
+            //Carro carro = db.Carro.Find(idp);
+            var lst = db.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == idp);
+            if (lst == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, lst);
         }
 
-        // GET: api/GitPractice/5
-        public string Get(int id)
+        // PUT: api/APICarros/5
+        //[ResponseType(typeof(void))]
+        [HttpPut, Route("")]
+        public HttpResponseMessage PutCarro(int idp, Carro carro)
         {
-            return "value";
+            var lst = db.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == idp);
+            if (lst == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, lst);
         }
 
-        // POST: api/GitPractice
-        public void Post([FromBody]string value)
+        // POST: api/APICarros
+        //[ResponseType(typeof(Carro))]
+        [HttpPost, Route(""), BasicAuthorize]
+        public HttpResponseMessage PostCarro(Carro carro)
         {
+            var lst = db.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == carro.id_car);
+            if (lst == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, lst);
         }
 
-        // PUT: api/GitPractice/5
-        public void Put(int id, [FromBody]string value)
+        // DELETE: api/APICarros/5
+        //[ResponseType(typeof(Carro))]
+        [HttpDelete, Route("")]
+        public HttpResponseMessage DeleteCarro(int idp)
         {
+            var lst = db.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == idp);
+            if (lst == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, lst);
         }
 
-        // DELETE: api/GitPractice/5
-        public void Delete(int id)
+        protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool CarroExists(int id)
+        {
+            return db.Carro.Count(e => e.id_car == id) > 0;
         }
     }
 }
