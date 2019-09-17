@@ -12,20 +12,22 @@ namespace Practica_Git.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Marca
+    public partial class Producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Marca()
+        public Producto()
         {
-            this.Producto = new HashSet<Producto>();
+            this.Detalle = new HashSet<Detalle>();
         }
     
-        public int id_marca { get; set; }
-        public string nombre_marca { get; set; }
-        public int id_grup_marca { get; set; }
+        public int id_prod { get; set; }
+        public string nombre_prod { get; set; }
+        public int id_marca_prod { get; set; }
+        public int id_grup_prod { get; set; }
     
-        public virtual Grupo Grupo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Producto> Producto { get; set; }
+        public virtual ICollection<Detalle> Detalle { get; set; }
+        public virtual Grupo Grupo { get; set; }
+        public virtual Marca Marca { get; set; }
     }
 }

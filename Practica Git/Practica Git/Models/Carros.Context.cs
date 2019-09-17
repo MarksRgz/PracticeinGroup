@@ -13,10 +13,10 @@ namespace Practica_Git.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CarrosEntities : DbContext
+    public partial class CarrosEFEntities : DbContext
     {
-        public CarrosEntities()
-            : base("name=CarrosEntities")
+        public CarrosEFEntities()
+            : base("name=CarrosEFEntities")
         {
         }
     

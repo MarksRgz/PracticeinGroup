@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'D:\Repository\PracticeinGroup\Practica Git\Practica Git\Models\Model1.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\SubNet\Documents\Programación\PracticeinGroup\Practica Git\Practica Git\Models\Productos.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

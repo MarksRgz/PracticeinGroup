@@ -12,15 +12,11 @@ namespace Practica_Git.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Carro
+    public partial class Usuario
     {
-        public int id_car { get; set; }
-        public int id_marca_car { get; set; }
-        public int id_modelo_car { get; set; }
-        public string descripcion_car { get; set; }
-        public string imagen_car { get; set; }
-    
-        public virtual Marca Marca { get; set; }
-        public virtual Modelo Modelo { get; set; }
+        public int id_usua { get; set; }
+        public string nombre_usua { get; set; }
+        public int pass_usua { get; set; }
+        public bool estatus_usua { get; set; }
     }
 }

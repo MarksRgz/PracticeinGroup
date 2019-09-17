@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarrosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CarrosEFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Carro">
           <Key>
             <PropertyRef Name="id_car" />
@@ -53,7 +53,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CarrosModelStoreContainer">
+        <EntityContainer Name="CarrosEFModelStoreContainer">
           <EntitySet Name="Carro" EntityType="Self.Carro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modelo" EntityType="Self.Modelo" Schema="dbo" store:Type="Tables" />
@@ -70,7 +70,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CarrosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CarrosEFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Carro">
           <Key>
             <PropertyRef Name="id_car" />
@@ -123,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CarrosEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CarrosEFEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carro" EntityType="Self.Carro" />
           <EntitySet Name="Marca" EntityType="Self.Marca" />
           <EntitySet Name="Modelo" EntityType="Self.Modelo" />
@@ -141,9 +141,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CarrosModelStoreContainer" CdmEntityContainer="CarrosEntities">
+        <EntityContainerMapping StorageEntityContainer="CarrosEFModelStoreContainer" CdmEntityContainer="CarrosEFEntities">
           <EntitySetMapping Name="Carro">
-            <EntityTypeMapping TypeName="CarrosModel.Carro">
+            <EntityTypeMapping TypeName="CarrosEFModel.Carro">
               <MappingFragment StoreEntitySet="Carro">
                 <ScalarProperty Name="id_car" ColumnName="id_car" />
                 <ScalarProperty Name="id_marca_car" ColumnName="id_marca_car" />
@@ -154,7 +154,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Marca">
-            <EntityTypeMapping TypeName="CarrosModel.Marca">
+            <EntityTypeMapping TypeName="CarrosEFModel.Marca">
               <MappingFragment StoreEntitySet="Marca">
                 <ScalarProperty Name="id_marca" ColumnName="id_marca" />
                 <ScalarProperty Name="nombre_marca" ColumnName="nombre_marca" />
@@ -162,7 +162,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Modelo">
-            <EntityTypeMapping TypeName="CarrosModel.Modelo">
+            <EntityTypeMapping TypeName="CarrosEFModel.Modelo">
               <MappingFragment StoreEntitySet="Modelo">
                 <ScalarProperty Name="id_modelo" ColumnName="id_modelo" />
                 <ScalarProperty Name="nombre_modelo" ColumnName="nombre_modelo" />
