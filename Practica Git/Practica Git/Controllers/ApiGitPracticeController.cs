@@ -13,7 +13,7 @@ namespace Practica_Git.Controllers
     public class ApiGitPracticeController : ApiController
     {
         private CarrosEntities db = new CarrosEntities();
-        
+        [Route("")]
         [Route(""), BasicAuthorize]
         // GET: api/APICarros
         public HttpResponseMessage GetCarros()
@@ -71,9 +71,9 @@ namespace Practica_Git.Controllers
         // DELETE: api/APICarros/5
         //[ResponseType(typeof(Carro))]
         [HttpDelete, Route("")]
-        public HttpResponseMessage DeleteCarro(int id)
+        public HttpResponseMessage DeleteCarro(int idp)
         {
-            var lst = db.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == id);
+            var lst = db.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == idp);
             if (lst == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
