@@ -7,11 +7,13 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http.Filters;
 using System.Web.Http.Controllers;
+using Practica_Git.Models;
 
 namespace Practica_Git.Module
 {
     public class BasicAuthorizeAttribute : AuthorizationFilterAttribute
     {
+        private EFProductosEntities db = new EFProductosEntities();
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             var encabezados = actionContext.Request.Headers;

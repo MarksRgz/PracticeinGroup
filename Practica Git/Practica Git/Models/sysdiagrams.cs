@@ -7,20 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Practica_Git.Models.Marcacarro
+namespace Practica_Git.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Carro
+    public partial class sysdiagrams
     {
-        public int id_car { get; set; }
-        public int id_marca_car { get; set; }
-        public int id_modelo_car { get; set; }
-        public string descripcion_car { get; set; }
-        public string imagen_car { get; set; }
-    
-        public virtual Marca Marca { get; set; }
-        public virtual Modelo Modelo { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

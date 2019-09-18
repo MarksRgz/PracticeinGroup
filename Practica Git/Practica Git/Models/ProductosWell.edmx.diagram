@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b8a1d1ce630b44d594ac82c799d89784" Name="Diagram1">
+        <EntityTypeShape EntityType="ProductosWellModel.Detalle" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductosWellModel.Grupo" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductosWellModel.Marca" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductosWellModel.Producto" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductosWellModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductosWellModel.Usuario" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="ProductosWellModel.FK_Detalle_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductosWellModel.FK_Marca_Grupo" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductosWellModel.FK_Producto_Grupo" ManuallyRouted="false" />
+        <AssociationConnector Association="ProductosWellModel.FK_Producto_Marca" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

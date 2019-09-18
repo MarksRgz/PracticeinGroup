@@ -132,6 +132,16 @@
       <DependentUpon>Carros.edmx</DependentUpon>
       <LastGenOutput>Carros.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\CarroWell.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarroWell.edmx</DependentUpon>
+      <LastGenOutput>CarroWell.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CarroWell.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarroWell.edmx</DependentUpon>
+      <LastGenOutput>CarroWell.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Productos.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Productos.edmx</DependentUpon>
@@ -141,6 +151,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Productos.edmx</DependentUpon>
       <LastGenOutput>Productos.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductosWell.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductosWell.edmx</DependentUpon>
+      <LastGenOutput>ProductosWell.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductosWell.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductosWell.edmx</DependentUpon>
+      <LastGenOutput>ProductosWell.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -157,6 +177,20 @@
     </EntityDeploy>
     <Content Include="Models\Productos.edmx.diagram">
       <DependentUpon>Productos.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\CarroWell.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CarroWell.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CarroWell.edmx.diagram">
+      <DependentUpon>CarroWell.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ProductosWell.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductosWell.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProductosWell.edmx.diagram">
+      <DependentUpon>ProductosWell.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -176,7 +210,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Carro.cs">
-      <DependentUpon>Carros.tt</DependentUpon>
+      <DependentUpon>CarroWell.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Carros.Context.cs">
       <AutoGen>True</AutoGen>
@@ -193,20 +227,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Carros.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarroWell.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarroWell.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarroWell.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarroWell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarroWell.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarroWell.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Detalle.cs">
-      <DependentUpon>Productos.tt</DependentUpon>
+      <DependentUpon>ProductosWell.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grupo.cs">
-      <DependentUpon>Productos.tt</DependentUpon>
+      <DependentUpon>ProductosWell.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Marca.cs">
-      <DependentUpon>Productos.tt</DependentUpon>
+      <DependentUpon>ProductosWell.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Modelo.cs">
-      <DependentUpon>Carros.tt</DependentUpon>
+      <DependentUpon>CarroWell.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Producto.cs">
-      <DependentUpon>Productos.tt</DependentUpon>
+      <DependentUpon>ProductosWell.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Productos.Context.cs">
       <AutoGen>True</AutoGen>
@@ -223,8 +272,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Productos.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductosWell.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductosWell.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductosWell.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductosWell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductosWell.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductosWell.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ProductosWell.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs">
-      <DependentUpon>Productos.tt</DependentUpon>
+      <DependentUpon>ProductosWell.tt</DependentUpon>
     </Compile>
     <Compile Include="Module\BasicAuthorizeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

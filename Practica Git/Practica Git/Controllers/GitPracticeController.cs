@@ -14,7 +14,7 @@ namespace Practica_Git.Controllers
     {
         private CarrosEFEntities dbc = new CarrosEFEntities();
         private EFProductosEntities db = new EFProductosEntities();
-        //private CarrosEFEntities dbc = new CarrosEFEntities();
+        private CarrosWellEntities dbw = new CarrosWellEntities();
         // GET: Home
         public ActionResult Index()
         {
@@ -92,7 +92,7 @@ namespace Practica_Git.Controllers
             return View(car);
         }
         [HttpPost]
-        public ActionResult Create(Practica_Git.Models.Carro car)
+        public ActionResult Create(Practica_Git.Models.Marcacarro.Carro car)
         {
             if (car.id_car == 0)
             {

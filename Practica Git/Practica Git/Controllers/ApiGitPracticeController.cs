@@ -13,11 +13,12 @@ namespace Practica_Git.Controllers
     public class ApiGitPracticeController : ApiController
     {
         private CarrosEFEntities db = new CarrosEFEntities();
+        private CarrosWellEntities dbc = new CarrosWellEntities();
         [Route(""), BasicAuthorize]
         // GET: api/APICarros
         public HttpResponseMessage GetCarros()
         {
-            var lst = db.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car, nombre_marca = c.nombre_marca, nombre_modelo = c.nombre_modelo }).ToList();
+            var lst = dbc.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car /*nombre_marca = c.nombre_marca, nombre_modelo = c.nombre_modelo*/}).ToList();
             return Request.CreateResponse(HttpStatusCode.OK, lst);
         }
         [Route("marca")]
