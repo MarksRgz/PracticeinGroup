@@ -23,7 +23,7 @@
                             <div>
                                 <span>@item.nombre_marca</span><strong>@item.nombre_modelo</strong>
                                 <p>@item.descripcion_car</p>
-                                <a href="/GitPractice/About" class="button">Conocelo</a>
+                                <a href="/GitPractice/About?id=@item.id_car" class="button">Conocelo</a>
                             </div>
                         </div>
                     </li>
@@ -172,119 +172,146 @@
 </div>
 @section Scripts{
     <script>
-            var archivo;
-            $(document).ready(function () {
-                'use strict';
-                console.log('Archivo');
-                $('input[type="file"]').change(function (e) {
-                    archivo = e.target.files[0];
-                    console.log('The file "' + archivo.name + '" has been selected.');
-                });
-                $('#btnCerrar').on("click", function () {
-                    $('#formDatos').trigger("reset");
-                    $('#exampleModalLabel').text("Agregar un Carro");
-                    $('#btnEliminar').hide();
-                });
+        var archivo;
+        $(document).ready(function () {
+            'use strict';
+            console.log('Archivo');
+            $('input[type="file"]').change(function (e) {
+                archivo = e.target.files[0];
+                console.log('The file "' + archivo.name + '" has been selected.');
             });
-            $('#slider').delegate("div", "click", function () {
-                $('#exampleModal').modal({
-                    keyboard: false,
-                    backdrop: 'static',
-                    show: true
-                });
-                $('input[name=id_car]').val($(this).attr("data-id_car"));
-                $('input[name=nombre_marca]').val($(this).attr("data-nombre_marca"));
-                $('input[name=nombre_modelo]').val($(this).attr("data-nombre_modelo"));
-                $('input[name=descripcion_car]').val($(this).attr("data-descripcion_car"));
-
-                $('#btnEliminar').show();
-                $('#btnEliminar').attr("data-id_car", $(this).attr("data-id_car"));
-                $('#btnEliminar').attr("data-nombre_marca", $(this).attr("data-nombre_marca"));
-
-                $('#exampleModalLabel').text("Editar " + $(this).attr("data-nombre_marca"));
+            $('#btnCerrar').on("click", function () {
+                $('#formDatos').trigger("reset");
+                $('#exampleModalLabel').text("Agregar un Carro");
+                $('#btnEliminar').hide();
             });
-            $('#lblOpenModal').on("click", function () {
-                $('#exampleModalLabel').text("Agregar un Producto");
-                $('input[name=id_prod]').val('0');
-                $('#exampleModal').modal({
-                    keyboard: false,
-                    backdrop: 'static',
-                    show: true
-                });
+        });
+        $('#slider').delegate("div", "click", function () {
+            $('#exampleModal').modal({
+                keyboard: false,
+                backdrop: 'static',
+                show: true
             });
-            $('#btnGuardar').on("click", function () {
+            $('input[name=id_car]').val($(this).attr("data-id_car"));
+            $('input[name=nombre_marca]').val($(this).attr("data-nombre_marca"));
+            $('input[name=nombre_modelo]').val($(this).attr("data-nombre_modelo"));
+            $('input[name=descripcion_car]').val($(this).attr("data-descripcion_car"));
 
-                if ($('input[name=nombre_marca]').val() !== '' && $('input[name=nombre_modelo]').val() !== '' && $('input[name=descripcion_car]').val() !== '' && $('input[name=imagecar]').val() !== '') {
+            $('#btnEliminar').show();
+            $('#btnEliminar').attr("data-id_car", $(this).attr("data-id_car"));
+            $('#btnEliminar').attr("data-nombre_marca", $(this).attr("data-nombre_marca"));
 
-                    var d = {
-                        nombre_marca: $('[name=nombre_marca]').val(),
-                        nombre_modelo: $('[name=nombre_modelo]').val(),
-                        descripcion_car: $('[name=descripcion_car]').val(),
-                        id_car: $('input[name=id_car]').val()
-                    };
-                    d.imagen_car = !archivo ? $('input[name=imagen_car]').val() : '/images/' + archivo.name;
+            $('#exampleModalLabel').text("Editar " + $(this).attr("data-nombre_marca"));
+        });
+        $('#lblOpenModal').on("click", function () {
+            $('#exampleModalLabel').text("Agregar un Producto");
+            $('input[name=id_prod]').val('0');
+            $('#exampleModal').modal({
+                keyboard: false,
+                backdrop: 'static',
+                show: true
+            });
+        });
+        $('#btnGuardar').on("click", function () {
 
-                    var data = new FormData();
-                    data.append('nombre_marca', d.nombre_marca);
-                    data.append('nombre_modelo', d.nombre_modelo);
-                    data.append('descripcion_car', d.descripcion_car);
-                    data.append('id_car', d.id_car);
-                    data.append('file', archivo);
-                    //type: 'POST' solo para < 1.9
-                    $.ajax({
-                        url: '/GitPractice/Create',
-                        data: data,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        method: 'POST',
-                        done: function (data) {
-                            console.log(data);
-                            var mensaje = '';
-                            $('#exampleModal').modal('hide');
+            if ($('input[name=nombre_marca]').val() !== '' && $('input[name=nombre_modelo]').val() !== '' && $('input[name=descripcion_car]').val() !== '' && $('input[name=imagecar]').val() !== '') {
 
-                            $('#formDatos').trigger("reset");
+                var d = {
+                    nombre_marca: $('[name=nombre_marca]').val(),
+                    nombre_modelo: $('[name=nombre_modelo]').val(),
+                    descripcion_car: $('[name=descripcion_car]').val(),
+                    id_car: $('input[name=id_car]').val()
+                };
+                d.imagen_car = !archivo ? $('input[name=imagen_car]').val() : '/images/' + archivo.name;
 
-                            if (d.id_car !== '0') {
-                                $('#divProd_' + d.id_car).remove();
-                                mensaje = 'Se ha editado ' + d.nombre_marca + d.nombre_modelo;
-                            } else {
-                                mensaje = 'Se ha agregado ' + d.nombre_marca + d.nombre_modelo;
-                            }
-                            var prod = data;
-                            var html = '';
-                            html += '<div class="col-sm-6 col-lg-4 text-center item mb-4" id="divProd_' + prod.id_car + '" data-idCar="' + prod.id_car + '" data-marca="' + prod.nombre_marca + '" data-modelo="' + prod.nombre_modelo + '" data-descripcion="' + prod.descripcion_car + '" data-imagen="' + prod.imagen_car + '">';
-                            html += '   <a href="#"> <img src="' + prod.imagen_car + '" alt="Image"></a>';
-                            html += '   <h3 class="text-dark"><a href="#">' + prod.nombre_modelo + '</a></h3>';
-                            html += '</div >';
-                            $('#divContenido').append(html);
-                            Swal.fire({
-                                position: 'bottom-end',
-                                type: 'success',
-                                title: mensaje,
-                                showConfirmButton: false,
-                                timer: 2500
-                            })
-                        },
-                        fail: function (error) {
-                            alert(error.responseText)
+                var data = new FormData();
+                data.append('nombre_marca', d.nombre_marca);
+                data.append('nombre_modelo', d.nombre_modelo);
+                data.append('descripcion_car', d.descripcion_car);
+                data.append('id_car', d.id_car);
+                data.append('file', archivo);
+                //type: 'POST' solo para < 1.9
+                $.ajax({
+                    url: '/GitPractice/Create',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    method: 'POST',
+                    success: function (data) {
+                        console.log(data);
+                        var mensaje = '';
+                        $('#exampleModal').modal('hide');
+
+                        $('#formDatos').trigger("reset");
+
+                        if (d.id_car !== '0') {
+                            $('#divProd_' + d.id_car).remove();
+                            mensaje = 'Se ha editado ' + d.nombre_marca + d.nombre_modelo;
+                        } else {
+                            mensaje = 'Se ha agregado ' + d.nombre_marca + d.nombre_modelo;
                         }
-                    });
-                    $('#btnEliminar').hide();
-                } else {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Oops...',
-                        text: 'Campos Requeridos!',
-                        head: '<a href>Why do I have this issue?</a>'
-                    })
-                }
-            });
-            //$(document).ready(function () {
-            $("#GrupodeProductohtml").on("change", function () {
+                        var prod = data;
+                        var html = '';
+                        html += '<div class="col-sm-6 col-lg-4 text-center item mb-4" id="divProd_' + prod.id_car + '" data-idCar="' + prod.id_car + '" data-marca="' + prod.nombre_marca + '" data-modelo="' + prod.nombre_modelo + '" data-descripcion="' + prod.descripcion_car + '" data-imagen="' + prod.imagen_car + '">';
+                        html += '   <a href="#"> <img src="' + prod.imagen_car + '" alt="Image"></a>';
+                        html += '   <h3 class="text-dark"><a href="#">' + prod.nombre_modelo + '</a></h3>';
+                        html += '</div >';
+                        $('#divContenido').append(html);
+                        Swal.fire({
+                            position: 'bottom-end',
+                            type: 'success',
+                            title: mensaje,
+                            showConfirmButton: false,
+                            timer: 2500
+                        })
+                    },
+                    fail: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+                $('#btnEliminar').hide();
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Campos Requeridos!',
+                    head: '<a href>Why do I have this issue?</a>'
+                })
+            }
+        });
+        $(document).ready(function () {
+        $("#GrupodeProductohtml").on("change", function () {
+            if ($(this).val() !== '') {
+                jQuery.ajax({
+                    url: '/GitPractice/GetGrupos?id=' + $(this).val(),
+                    data: "",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    method: 'GET',
+                    success: function (data) {
+                        console.log(data);
+                        $('#ddlMarca').empty();
+                        $('#ddlMarca').append('<option value="">-Selecciona Marca-</option>');
+                        $(data).each(function (index, item) {
+                            $('#ddlMarca').append('<option value="' + item.id_marca + '">' + item.nombre_marca + '</option>');
+                        });
+                    }, error: function (error) {
+                        console.log(error.responseText)
+                    }
+                });
+            } else {
+                $('#ddlMarca').empty();
+                $('#ddlMarca').append('<option value="">-Selecciona Marca-</option>');
+            }
+        });
+
+        $(document).ready(function () {
+            $("#ddlMarca").on("change", function () {
                 if ($(this).val() !== '') {
                     jQuery.ajax({
-                        url: '/GitPractice/GetGrupos?id=' + $(this).val(),
+                        url: '/GitPractice/GetMarcas?id=' + $(this).val(),
                         data: "",
                         cache: false,
                         contentType: false,
@@ -292,47 +319,20 @@
                         method: 'GET',
                         success: function (data) {
                             console.log(data);
-                            $('#ddlMarca').empty();
-                            $('#ddlMarca').append('<option value="">-Selecciona Marca-</option>');
+                            $('#ddlProd').empty();
+                            $('#ddlProd').append('<option value="">-Selecciona Producto-</option>');
                             $(data).each(function (index, item) {
-                                $('#ddlMarca').append('<option value="' + item.id_marca + '">' + item.nombre_marca + '</option>');
+                                $('#ddlProd').append('<option value="' + item.id_prod + '">' + item.nombre_prod + '</option>');
                             });
                         }, error: function (error) {
                             console.log(error.responseText)
                         }
                     });
                 } else {
-                    $('#ddlMarca').empty();
-                    $('#ddlMarca').append('<option value="">-Selecciona Marca-</option>');
+                    $('#ddlProd').empty();
+                    $('#ddlProd').append('<option value="">-Selecciona Producto-</option>');
                 }
             });
-
-            $(document).ready(function () {
-                $("#ddlMarca").on("change", function () {
-                    if ($(this).val() !== '') {
-                        jQuery.ajax({
-                            url: '/GitPractice/GetMarcas?id=' + $(this).val(),
-                            data: "",
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            method: 'GET',
-                            success: function (data) {
-                                console.log(data);
-                                $('#ddlProd').empty();
-                                $('#ddlProd').append('<option value="">-Selecciona Producto-</option>');
-                                $(data).each(function (index, item) {
-                                    $('#ddlProd').append('<option value="' + item.id_prod + '">' + item.nombre_prod + '</option>');
-                                });
-                            }, error: function (error) {
-                                console.log(error.responseText)
-                            }
-                        });
-                    } else {
-                        $('#ddlProd').empty();
-                        $('#ddlProd').append('<option value="">-Selecciona Producto-</option>');
-                    }
-                });
-            });
+        });
     </script>
 }
