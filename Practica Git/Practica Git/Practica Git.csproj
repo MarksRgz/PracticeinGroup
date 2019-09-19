@@ -122,16 +122,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Carros.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Carros.edmx</DependentUpon>
-      <LastGenOutput>Carros.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Carros.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Carros.edmx</DependentUpon>
-      <LastGenOutput>Carros.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\CarroWell.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CarroWell.edmx</DependentUpon>
@@ -164,13 +154,6 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Carros.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Carros.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Carros.edmx.diagram">
-      <DependentUpon>Carros.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\Productos.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Productos.Designer.cs</LastGenOutput>
@@ -211,21 +194,6 @@
     </Compile>
     <Compile Include="Models\Carro.cs">
       <DependentUpon>CarroWell.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Carros.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Carros.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Carros.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Carros.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Carros.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Carros.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\CarroWell.Context.cs">
       <AutoGen>True</AutoGen>

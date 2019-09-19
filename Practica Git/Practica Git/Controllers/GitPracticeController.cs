@@ -12,7 +12,6 @@ namespace Practica_Git.Controllers
 
     public class GitPracticeController : Controller
     {
-        private CarrosEFEntities dbc = new CarrosEFEntities();
         private EFProductosEntities db = new EFProductosEntities();
         private CarrosWellEntities dbw = new CarrosWellEntities();
         // GET: Home
@@ -92,14 +91,14 @@ namespace Practica_Git.Controllers
             return View(car);
         }
         [HttpPost]
-        public ActionResult Create(Practica_Git.Models.Marcacarro.Carro car)
+        public ActionResult Create(Practica_Git.Models.Carro car)
         {
             if (car.id_car == 0)
             {
                 var archivo = Request.Files[1];
                 archivo.SaveAs(Server.MapPath("~/images/" + archivo.FileName));
-                dbc.Carro.Add(car);
-                dbc.SaveChanges();
+                //dbc.Carro.Add(car);
+                dbw.SaveChanges();
             }
             else
             {
@@ -109,8 +108,8 @@ namespace Practica_Git.Controllers
                     var archivo = Request.Files[0];
                     archivo.SaveAs(Server.MapPath("~/images/" + archivo.FileName));
                 }
-                dbc.Entry(car).State = EntityState.Modified;
-                dbc.SaveChanges();
+                dbw.Entry(car).State = EntityState.Modified;
+                dbw.SaveChanges();
             }
             Response.StatusCode = 200;
             Response.StatusDescription = "Objeto Creado";

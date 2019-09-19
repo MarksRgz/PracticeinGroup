@@ -13,16 +13,14 @@ namespace Brachi.Bussines.BusPractica
     {
         public Carro()
         {
-            marca = new Marca();
-            modelo = new Modelo();
+          
         }
         public int id_car { get; set; }
         public string descripcion_car { get; set; }
         public string imagen_car { get; set; }
         public string nombre_marca { get; set; }
         public string nombre_modelo { get; set; }
-        public Marca marca { get; set; }
-        public Modelo modelo { get; set; }
+     
     }
     public class Marca
     {

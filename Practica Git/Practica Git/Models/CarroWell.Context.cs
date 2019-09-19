@@ -9,6 +9,7 @@
 
 namespace Practica_Git.Models
 {
+    using Brachi.Bussines.BusPractica;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;

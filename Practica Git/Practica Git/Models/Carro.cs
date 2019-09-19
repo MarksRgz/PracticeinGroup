@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Practica_Git.Models.Marcacarro
+namespace Practica_Git.Models
 {
     using System;
     using System.Collections.Generic;

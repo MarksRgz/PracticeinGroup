@@ -25,5 +25,14 @@ namespace Brachi.Bussines.BusPractica
             }
             return lst;
         }
+        public List<Marca> GetMarcas()
+        {
+            List<Marca> lst = new List<Marca>();
+            using (con)
+            {
+                lst = con.Query<Marca>("spGetMarcas").ToList();
+            }
+            return lst;
+        }
     }
 }
