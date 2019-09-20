@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,24 @@ namespace Brachi.Bussines.BusPractica
                 lst = con.Query<Marca>("spGetMarcas").ToList();
             }
             return lst;
+        }
+        public int Update(Carro car)
+        {
+            using (con)
+            {
+                Carro carro = new Carro();
+                carro = con.QueryFirst(("spUpdateCarro"), new { id_car = car.id_car, descripcion_car = car.descripcion_car, imagen_car = car.imagen_car });
+                return carro.id_car;
+            }
+        }
+        public int UpdateCarro(Carro car)
+        {
+            using (con)
+            {
+                var filas = con.Execute(("spUpdateCarro"), new { id_car = car.id_car, descripcion_car = car.descripcion_car, imagen_car = car.imagen_car }, commandType: CommandType.StoredProcedure);
+                return filas;
+
+            }
         }
     }
 }

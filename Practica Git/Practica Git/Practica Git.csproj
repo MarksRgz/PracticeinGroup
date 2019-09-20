@@ -189,6 +189,7 @@
     <Compile Include="Controllers\ApiGitPracticeController.cs" />
     <Compile Include="Controllers\ConsumoController.cs" />
     <Compile Include="Controllers\GitPracticeController.cs" />
+    <Compile Include="Controllers\ProductosEFController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -282,6 +283,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\GitPractice\About.cshtml" />
     <Content Include="Views\GitPractice\Login.cshtml" />
+    <Content Include="Views\ProductosEF\Create.cshtml" />
+    <Content Include="Views\ProductosEF\Delete.cshtml" />
+    <Content Include="Views\ProductosEF\Details.cshtml" />
+    <Content Include="Views\ProductosEF\Edit.cshtml" />
+    <Content Include="Views\ProductosEF\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

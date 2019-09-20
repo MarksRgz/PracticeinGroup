@@ -1,10 +1,13 @@
 ﻿using Brachi.Bussines.BusPractica;
 using Practica_Git.Models;
 using Practica_Git.Module;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Carro = Brachi.Bussines.BusPractica.Carro;
 
 namespace Practica_Git.Controllers
 {
@@ -41,21 +44,19 @@ namespace Practica_Git.Controllers
         // PUT: api/APICarros/5
         //[ResponseType(typeof(void))]
         [HttpPut, Route("")]
-        public HttpResponseMessage PutCarro(int idp, Brachi.Bussines.BusPractica.Carro carro)
+        public HttpResponseMessage PutCarro(int idp, Carro carro)
         {
-            var lst = new BusCars().GetCarros();
-            Brachi.Bussines.BusPractica.Carro car = lst.FirstOrDefault(l => l.id_car == idp);
-            if (idp != 1)
+            int car1 = new BusCars().UpdateCarro(carro);
+            if (car1 > 0)
             {
-                return Request.CreateResponse(HttpStatusCode.NotModified, car);
+                return Request.CreateResponse(HttpStatusCode.NotModified, true);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, car);
+            return Request.CreateResponse(HttpStatusCode.Accepted, false);
         }
-
         // POST: api/APICarros
         //[ResponseType(typeof(Carro))]
         [HttpPost, Route(""), BasicAuthorize]
-        public HttpResponseMessage PostCarro(Brachi.Bussines.BusPractica.Carro carro)
+        public HttpResponseMessage PostCarro(Carro carro)
         {
             var lst = dbw.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == carro.id_car);
             if (lst == null)
