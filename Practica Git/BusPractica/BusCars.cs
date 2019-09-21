@@ -70,6 +70,33 @@ namespace Brachi.Bussines.BusPractica
             }
             return lst;
         }
+        public List<Producto> GetProductos()
+        {
+            List<Producto> lst = new List<Producto>();
+            using (conu)
+            {
+                lst = conu.Query<Producto>("spGetProductos").ToList();
+            }
+            return lst;
+        }
+        public List<MarcaProd> GetMarcasProd()
+        {
+            List<MarcaProd> lst = new List<MarcaProd>();
+            using (conu)
+            {
+                lst = conu.Query<MarcaProd>("spGetMarcasProd").ToList();
+            }
+            return lst;
+        }
+        public List<GrupoProd> GetGrupos()
+        {
+            List<GrupoProd> lst = new List<GrupoProd>();
+            using (conu)
+            {
+                lst = conu.Query<GrupoProd>("spGetGruposProd").ToList();
+            }
+            return lst;
+        }
     }
 }
 

@@ -39,7 +39,25 @@ namespace Brachi.Bussines.BusPractica
     {
         public int id_usua { get; set; }
         public string nombre_usua { get; set; }
-        public int pass_usua { get; set; }
+        public string pass_usua { get; set; }
         public bool estatus_usua { get; set; }
+    }
+    public class Producto
+    {
+        public int id_prod { get; set; }
+        public int id_marca_prod { get; set; }
+        public int id_grup_prod { get; set; }
+        public string nombre_prod { get; set; }
+    }
+    public class MarcaProd
+    {
+        public int id_marca { get; set; }
+        public int id_grup_marca { get; set; }
+        public string nombre_marca { get; set; }
+    }
+    public class GrupoProd
+    {
+        public int id_grup { get; set; }
+        public string nombre_grup { get; set; }
     }
 }

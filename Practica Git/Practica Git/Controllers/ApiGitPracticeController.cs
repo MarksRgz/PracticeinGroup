@@ -1,5 +1,4 @@
 ﻿using Brachi.Bussines.BusPractica;
-using Practica_Git.Models;
 using Practica_Git.Module;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ namespace Practica_Git.Controllers
     [RoutePrefix("api/carros")]
     public class ApiGitPracticeController : ApiController
     {
-        private CarrosWellEntities dbw = new CarrosWellEntities();
         [Route(""), BasicAuthorize]
         // GET: api/APICarros
         public HttpResponseMessage GetCarros()
@@ -77,20 +75,6 @@ namespace Practica_Git.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK, true);
             }
             return Request.CreateResponse(HttpStatusCode.Conflict, false);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                dbw.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool CarroExists(int id)
-        {
-            return dbw.Carro.Count(e => e.id_car == id) > 0;
         }
     }
 }

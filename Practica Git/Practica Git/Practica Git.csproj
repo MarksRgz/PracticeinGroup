@@ -122,59 +122,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\CarroWell.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarroWell.edmx</DependentUpon>
-      <LastGenOutput>CarroWell.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CarroWell.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarroWell.edmx</DependentUpon>
-      <LastGenOutput>CarroWell.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Productos.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Productos.edmx</DependentUpon>
-      <LastGenOutput>Productos.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Productos.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Productos.edmx</DependentUpon>
-      <LastGenOutput>Productos.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ProductosWellModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductosWellModel.edmx</DependentUpon>
-      <LastGenOutput>ProductosWellModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ProductosWellModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductosWellModel.edmx</DependentUpon>
-      <LastGenOutput>ProductosWellModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Productos.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Productos.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Productos.edmx.diagram">
-      <DependentUpon>Productos.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\CarroWell.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CarroWell.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CarroWell.edmx.diagram">
-      <DependentUpon>CarroWell.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\ProductosWellModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductosWellModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ProductosWellModel.edmx.diagram">
-      <DependentUpon>ProductosWellModel.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -189,78 +138,8 @@
     <Compile Include="Controllers\ApiGitPracticeController.cs" />
     <Compile Include="Controllers\ConsumoController.cs" />
     <Compile Include="Controllers\GitPracticeController.cs" />
-    <Compile Include="Controllers\ProductosEFController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Carro.cs">
-      <DependentUpon>CarroWell.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CarroWell.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarroWell.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CarroWell.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarroWell.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CarroWell.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarroWell.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Detalle.cs">
-      <DependentUpon>ProductosWellModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Grupo.cs">
-      <DependentUpon>ProductosWellModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Marca.cs">
-      <DependentUpon>ProductosWellModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Modelo.cs">
-      <DependentUpon>CarroWell.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Producto.cs">
-      <DependentUpon>ProductosWellModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Productos.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Productos.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Productos.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Productos.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Productos.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Productos.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductosWellModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductosWellModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductosWellModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductosWellModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductosWellModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductosWellModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\spGetUsuario_Result.cs">
-      <DependentUpon>ProductosWellModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usuario.cs">
-      <DependentUpon>ProductosWellModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Module\BasicAuthorizeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -297,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\Consumo\" />
   </ItemGroup>
   <ItemGroup>

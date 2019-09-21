@@ -1,11 +1,11 @@
-﻿using Practica_Git.Models;
-using RestSharp;
+﻿using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using Brachi.Bussines.BusPractica;
 
 namespace Practica_Git.Controllers
 {
