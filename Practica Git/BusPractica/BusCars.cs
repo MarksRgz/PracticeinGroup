@@ -44,11 +44,11 @@ namespace Brachi.Bussines.BusPractica
                 return filas;
             }
         }
-        public int CreateCarro(Carro car)
+        public Carro CreateCarro(Carro car)
         {
             using (con)
             {
-                var filas = con.Execute(("spInsertCarro"), new { id_marca_car = car.id_marca_car, id_modelo_car = car.id_modelo_car, descripcion_car = car.descripcion_car, imagen_car = car.imagen_car }, commandType: CommandType.StoredProcedure);
+                Carro filas = con.Query<Carro>(("spInsertCarro"), new { id_marca_car = car.id_marca_car, id_modelo_car = car.id_modelo_car, descripcion_car = car.descripcion_car, imagen_car = car.imagen_car }, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 return filas;
             }
         }
