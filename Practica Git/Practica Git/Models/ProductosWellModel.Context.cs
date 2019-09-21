@@ -12,6 +12,8 @@ namespace Practica_Git.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ProductosWellEntities : DbContext
     {
@@ -29,7 +31,19 @@ namespace Practica_Git.Models
         public virtual DbSet<Grupo> Grupo { get; set; }
         public virtual DbSet<Marca> Marca { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+    
+        public virtual ObjectResult<spGetUsuario_Result> spGetUsuario(string nombre, string password)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetUsuario_Result>("spGetUsuario", nombreParameter, passwordParameter);
+        }
     }
 }

@@ -10,14 +10,12 @@
 namespace Practica_Git.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class spGetUsuario_Result
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int id_usua { get; set; }
+        public string nombre_usua { get; set; }
+        public string pass_usua { get; set; }
+        public bool estatus_usua { get; set; }
     }
 }

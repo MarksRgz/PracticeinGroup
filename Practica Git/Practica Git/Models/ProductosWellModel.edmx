@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProductosWellModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ProductosModelNS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Detalle">
           <Key>
             <PropertyRef Name="id_deta" />
@@ -39,23 +39,13 @@
           <Property Name="id_marca_prod" Type="int" Nullable="false" />
           <Property Name="id_grup_prod" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="id_usua" />
           </Key>
           <Property Name="id_usua" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre_usua" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="pass_usua" Type="int" Nullable="false" />
+          <Property Name="pass_usua" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estatus_usua" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Detalle_Producto">
@@ -106,12 +96,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProductosWellModelStoreContainer">
+        <Function Name="spGetUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProductosModelNSStoreContainer">
           <EntitySet Name="Detalle" EntityType="Self.Detalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Detalle_Producto" Association="Self.FK_Detalle_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -134,7 +127,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ProductosWellModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ProductosModelNS" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Detalle">
           <Key>
             <PropertyRef Name="id_deta" />
@@ -177,23 +170,13 @@
           <NavigationProperty Name="Grupo" Relationship="Self.FK_Producto_Grupo" FromRole="Producto" ToRole="Grupo" />
           <NavigationProperty Name="Marca" Relationship="Self.FK_Producto_Marca" FromRole="Producto" ToRole="Marca" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="id_usua" />
           </Key>
           <Property Name="id_usua" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre_usua" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="pass_usua" Type="Int32" Nullable="false" />
+          <Property Name="pass_usua" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estatus_usua" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Detalle_Producto">
@@ -249,7 +232,6 @@
           <EntitySet Name="Grupo" EntityType="Self.Grupo" />
           <EntitySet Name="Marca" EntityType="Self.Marca" />
           <EntitySet Name="Producto" EntityType="Self.Producto" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <AssociationSet Name="FK_Detalle_Producto" Association="Self.FK_Detalle_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -267,15 +249,25 @@
             <End Role="Marca" EntitySet="Marca" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
+          <FunctionImport Name="spGetUsuario" ReturnType="Collection(ProductosModelNS.spGetUsuario_Result)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="spGetUsuario_Result">
+          <Property Type="Int32" Name="id_usua" Nullable="false" />
+          <Property Type="String" Name="nombre_usua" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="pass_usua" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="estatus_usua" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProductosWellModelStoreContainer" CdmEntityContainer="ProductosWellEntities">
+        <EntityContainerMapping StorageEntityContainer="ProductosModelNSStoreContainer" CdmEntityContainer="ProductosWellEntities">
           <EntitySetMapping Name="Detalle">
-            <EntityTypeMapping TypeName="ProductosWellModel.Detalle">
+            <EntityTypeMapping TypeName="ProductosModelNS.Detalle">
               <MappingFragment StoreEntitySet="Detalle">
                 <ScalarProperty Name="id_deta" ColumnName="id_deta" />
                 <ScalarProperty Name="id_prod_deta" ColumnName="id_prod_deta" />
@@ -286,7 +278,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Grupo">
-            <EntityTypeMapping TypeName="ProductosWellModel.Grupo">
+            <EntityTypeMapping TypeName="ProductosModelNS.Grupo">
               <MappingFragment StoreEntitySet="Grupo">
                 <ScalarProperty Name="id_grup" ColumnName="id_grup" />
                 <ScalarProperty Name="nombre_grup" ColumnName="nombre_grup" />
@@ -294,7 +286,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Marca">
-            <EntityTypeMapping TypeName="ProductosWellModel.Marca">
+            <EntityTypeMapping TypeName="ProductosModelNS.Marca">
               <MappingFragment StoreEntitySet="Marca">
                 <ScalarProperty Name="id_marca" ColumnName="id_marca" />
                 <ScalarProperty Name="nombre_marca" ColumnName="nombre_marca" />
@@ -303,7 +295,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Producto">
-            <EntityTypeMapping TypeName="ProductosWellModel.Producto">
+            <EntityTypeMapping TypeName="ProductosModelNS.Producto">
               <MappingFragment StoreEntitySet="Producto">
                 <ScalarProperty Name="id_prod" ColumnName="id_prod" />
                 <ScalarProperty Name="nombre_prod" ColumnName="nombre_prod" />
@@ -312,19 +304,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ProductosWellModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="ProductosWellModel.Usuario">
+            <EntityTypeMapping TypeName="ProductosModelNS.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
                 <ScalarProperty Name="id_usua" ColumnName="id_usua" />
                 <ScalarProperty Name="nombre_usua" ColumnName="nombre_usua" />
@@ -333,6 +314,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetUsuario" FunctionName="ProductosModelNS.Store.spGetUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProductosModelNS.spGetUsuario_Result">
+                <ScalarProperty Name="id_usua" ColumnName="id_usua" />
+                <ScalarProperty Name="nombre_usua" ColumnName="nombre_usua" />
+                <ScalarProperty Name="pass_usua" ColumnName="pass_usua" />
+                <ScalarProperty Name="estatus_usua" ColumnName="estatus_usua" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

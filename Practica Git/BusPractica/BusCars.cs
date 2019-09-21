@@ -56,17 +56,17 @@ namespace Brachi.Bussines.BusPractica
         {
             using (con)
             {
-                var filas = con.Execute(("spDeleteCarro"), new {id_car = idp}, commandType: CommandType.StoredProcedure);
+                var filas = con.Execute(("spDeleteCarro"), new { id_car = idp }, commandType: CommandType.StoredProcedure);
                 return filas;
             }
-              
+
         }
-        public List<Usuario> GetUsuarios()
+        public Usuario GetUsuario(string nombre, string password)
         {
-            List<Usuario> lst = new List<Usuario>();
+            Usuario lst = new Usuario();
             using (conu)
             {
-                lst = conu.Query<Usuario>("spGetUsuarios").ToList();
+                lst = conu.Query<Usuario>("spGetUsuario", new { nombre = nombre, password = password }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
             return lst;
         }

@@ -16,7 +16,7 @@ namespace Practica_Git.Models
     {
         public int id_usua { get; set; }
         public string nombre_usua { get; set; }
-        public int pass_usua { get; set; }
+        public string pass_usua { get; set; }
         public bool estatus_usua { get; set; }
     }
 }

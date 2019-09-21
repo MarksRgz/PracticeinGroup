@@ -12,6 +12,8 @@ namespace Practica_Git.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EFProductosEntities : DbContext
     {
@@ -30,5 +32,14 @@ namespace Practica_Git.Models
         public virtual DbSet<Marca> Marca { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+    
+        public virtual ObjectResult<spGetUsuario_Result> spGetUsuario(Nullable<int> idUsua)
+        {
+            var idUsuaParameter = idUsua.HasValue ?
+                new ObjectParameter("idUsua", idUsua) :
+                new ObjectParameter("idUsua", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetUsuario_Result>("spGetUsuario", idUsuaParameter);
+        }
     }
 }

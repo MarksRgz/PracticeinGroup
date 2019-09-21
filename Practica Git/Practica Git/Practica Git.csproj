@@ -142,15 +142,15 @@
       <DependentUpon>Productos.edmx</DependentUpon>
       <LastGenOutput>Productos.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ProductosWell.Context.tt">
+    <Content Include="Models\ProductosWellModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductosWell.edmx</DependentUpon>
-      <LastGenOutput>ProductosWell.Context.cs</LastGenOutput>
+      <DependentUpon>ProductosWellModel.edmx</DependentUpon>
+      <LastGenOutput>ProductosWellModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ProductosWell.tt">
+    <Content Include="Models\ProductosWellModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductosWell.edmx</DependentUpon>
-      <LastGenOutput>ProductosWell.cs</LastGenOutput>
+      <DependentUpon>ProductosWellModel.edmx</DependentUpon>
+      <LastGenOutput>ProductosWellModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -168,12 +168,12 @@
     <Content Include="Models\CarroWell.edmx.diagram">
       <DependentUpon>CarroWell.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\ProductosWell.edmx">
+    <EntityDeploy Include="Models\ProductosWellModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductosWell.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProductosWellModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ProductosWell.edmx.diagram">
-      <DependentUpon>ProductosWell.edmx</DependentUpon>
+    <Content Include="Models\ProductosWellModel.edmx.diagram">
+      <DependentUpon>ProductosWellModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -212,19 +212,19 @@
       <DependentUpon>CarroWell.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Detalle.cs">
-      <DependentUpon>ProductosWell.tt</DependentUpon>
+      <DependentUpon>ProductosWellModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grupo.cs">
-      <DependentUpon>ProductosWell.tt</DependentUpon>
+      <DependentUpon>ProductosWellModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Marca.cs">
-      <DependentUpon>ProductosWell.tt</DependentUpon>
+      <DependentUpon>ProductosWellModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Modelo.cs">
       <DependentUpon>CarroWell.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Producto.cs">
-      <DependentUpon>ProductosWell.tt</DependentUpon>
+      <DependentUpon>ProductosWellModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Productos.Context.cs">
       <AutoGen>True</AutoGen>
@@ -241,26 +241,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Productos.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductosWell.Context.cs">
+    <Compile Include="Models\ProductosWellModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProductosWell.Context.tt</DependentUpon>
+      <DependentUpon>ProductosWellModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductosWell.cs">
+    <Compile Include="Models\ProductosWellModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProductosWell.tt</DependentUpon>
+      <DependentUpon>ProductosWellModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductosWell.Designer.cs">
+    <Compile Include="Models\ProductosWellModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProductosWell.edmx</DependentUpon>
+      <DependentUpon>ProductosWellModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ProductosWell.tt</DependentUpon>
+    <Compile Include="Models\spGetUsuario_Result.cs">
+      <DependentUpon>ProductosWellModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
-      <DependentUpon>ProductosWell.tt</DependentUpon>
+      <DependentUpon>ProductosWellModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Module\BasicAuthorizeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

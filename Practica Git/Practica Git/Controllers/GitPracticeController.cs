@@ -19,7 +19,7 @@ namespace Practica_Git.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            Practica_Git.Models.Usuario user = (Practica_Git.Models.Usuario)Session["Usuario"];
+            Brachi.Bussines.BusPractica.Usuario user = (Brachi.Bussines.BusPractica.Usuario)Session["Usuario"];
             if (user != null)
             {
                 ViewBag.GrupodeProducto = new SelectList(db.Grupo, "id_grup", "nombre_grup");
@@ -79,8 +79,9 @@ namespace Practica_Git.Controllers
         public ActionResult GetGrupos(int id)
         {
             //return Json(db.Marca.Where(m => m.id_grup_marca == id).ToList(), JsonRequestBehavior.AllowGet);
-            List<Practica_Git.Models.Marca> marca = db.Marca.Where(m => m.id_grup_marca == id).ToList();
-            return View(marca);
+            var marca = db.Marca.Where(m => m.id_grup_marca == id).Select(n => new { id_marca = n.id_marca, nombre_marca = n.nombre_marca }).ToList();
+
+            return Json(marca, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetMarcas(int id)
         {
@@ -126,9 +127,8 @@ namespace Practica_Git.Controllers
         [HttpPost]
         public ActionResult Login(Practica_Git.Models.Usuario user)
         {
-            List<Brachi.Bussines.BusPractica.Usuario> lst = new BusCars().GetUsuarios();
-            Brachi.Bussines.BusPractica.Usuario usuario = lst.FirstOrDefault(l => l.nombre_usua == user.nombre_usua && l.pass_usua == user.pass_usua);
-            if (usuario != null && user.estatus_usua)
+            Brachi.Bussines.BusPractica.Usuario usuario = new BusCars().GetUsuario(user.nombre_usua, user.pass_usua);
+            if (usuario != null && usuario.estatus_usua)
             {
                 Session["Usuario"] = usuario;
                 return RedirectToAction("Index");
