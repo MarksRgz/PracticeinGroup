@@ -49,21 +49,21 @@ namespace Practica_Git.Controllers
             int car1 = new BusCars().UpdateCarro(carro);
             if (car1 > 0)
             {
-                return Request.CreateResponse(HttpStatusCode.NotModified, true);
+                return Request.CreateResponse(HttpStatusCode.Accepted, true);
             }
-            return Request.CreateResponse(HttpStatusCode.Accepted, false);
+            return Request.CreateResponse(HttpStatusCode.NotModified, false);
         }
         // POST: api/APICarros
         //[ResponseType(typeof(Carro))]
         [HttpPost, Route(""), BasicAuthorize]
         public HttpResponseMessage PostCarro(Carro carro)
         {
-            var lst = dbw.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == carro.id_car);
-            if (lst == null)
+            int car1 = new BusCars().CreateCarro(carro);
+            if (car1 > 0)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.Created, true);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, lst);
+            return Request.CreateResponse(HttpStatusCode.OK, false);
         }
 
         // DELETE: api/APICarros/5
@@ -71,12 +71,12 @@ namespace Practica_Git.Controllers
         [HttpDelete, Route("")]
         public HttpResponseMessage DeleteCarro(int idp)
         {
-            var lst = dbw.Carro.Select(c => new { id_car = c.id_car, descripcion_car = c.descripcion_car }).FirstOrDefault(c => c.id_car == idp);
-            if (lst == null)
+            int car1 = new BusCars().DeleteCarro(idp);
+            if (car1 > 0)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.OK, true);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, lst);
+            return Request.CreateResponse(HttpStatusCode.Conflict, false);
         }
 
         protected override void Dispose(bool disposing)
