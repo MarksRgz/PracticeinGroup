@@ -58,10 +58,10 @@ namespace Practica_Git.Controllers
         [HttpPost, Route(""), BasicAuthorize]
         public HttpResponseMessage PostCarro(Carro carro)
         {
-            int car1 = new BusCars().CreateCarro(carro);
-            if (car1 > 0)
+            Carro car1 = new BusCars().CreateCarro(carro);
+            if (car1 != null)
             {
-                return Request.CreateResponse(HttpStatusCode.Created, true);
+                return Request.CreateResponse(HttpStatusCode.Created, car1);
             }
             return Request.CreateResponse(HttpStatusCode.OK, false);
         }
