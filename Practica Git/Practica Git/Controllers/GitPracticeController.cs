@@ -1,5 +1,4 @@
 ﻿using Brachi.Bussines.BusPractica;
-using Practica_Git.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,20 +13,18 @@ namespace Practica_Git.Controllers
 
     public class GitPracticeController : Controller
     {
-        private ProductosWellEntities db = new ProductosWellEntities();
-        private CarrosWellEntities dbw = new CarrosWellEntities();
         // GET: Home
         public ActionResult Index()
         {
             Brachi.Bussines.BusPractica.Usuario user = (Brachi.Bussines.BusPractica.Usuario)Session["Usuario"];
             if (user != null)
             {
-                ViewBag.GrupodeProducto = new SelectList(db.Grupo, "id_grup", "nombre_grup");
-                List<Practica_Git.Models.Marca> marca = new List<Practica_Git.Models.Marca>();
+                ViewBag.GrupodeProducto = new SelectList(new BusCars().GetGrupos(), "id_grup", "nombre_grup");
+                List<Marca> marca = new List<Marca>();
                 ViewBag.MarcadeProducto = new SelectList(marca, "id_marca", "nombre_marca");
-                List<Practica_Git.Models.Producto> producto = new List<Practica_Git.Models.Producto>();
+                List<Producto> producto = new List<Producto>();
                 ViewBag.Producto = new SelectList(producto, "id_prod", "nombre_prod");
-                ViewBag.GrupodeProductohtml = new SelectList(db.Grupo, "id_grup", "nombre_grup");
+                ViewBag.GrupodeProductohtml = new SelectList(new BusCars().GetGrupos(), "id_grup", "nombre_grup");
                 List<Brachi.Bussines.BusPractica.Carro> lst = new BusCars().GetCarros();
                 return View(lst);
             }
@@ -43,34 +40,34 @@ namespace Practica_Git.Controllers
             if (!string.IsNullOrEmpty(GrupodeProducto) && !string.IsNullOrEmpty(MarcadeProducto))
             {
                 int idgpo = Convert.ToInt32(GrupodeProducto);
-                ViewBag.GrupodeProducto = new SelectList(db.Grupo, "id_grup", "nombre_grup");
-                List<Practica_Git.Models.Marca> marca = db.Marca.Where(m => m.id_grup_marca == idgpo).ToList();
+                ViewBag.GrupodeProducto = new SelectList(new BusCars().GetGrupos(), "id_grup", "nombre_grup");
+                List<MarcaProd> marca = new BusCars().GetMarcasProd().Where(m => m.id_grup_marca == idgpo).ToList();
                 ViewBag.MarcadeProducto = new SelectList(marca, "id_marca", "nombre_marca");
                 int idmar = Convert.ToInt32(MarcadeProducto);
-                List<Practica_Git.Models.Producto> producto = (db.Producto.Where(p => p.id_marca_prod == idmar).ToList());
+                List<Producto> producto = (new BusCars().GetProductos().Where(p => p.id_marca_prod == idmar).ToList());
                 ViewBag.Producto = new SelectList(producto, "id_prod", "nombre_prod");
-                ViewBag.GrupodeProductohtml = new SelectList(db.Grupo, "id_grup", "nombre_grup");
+                ViewBag.GrupodeProductohtml = new SelectList(new BusCars().GetGrupos(), "id_grup", "nombre_grup");
             }
             else if (!string.IsNullOrEmpty(GrupodeProducto) && string.IsNullOrEmpty(MarcadeProducto))
             {
 
                 int idgpo = Convert.ToInt32(GrupodeProducto);
-                ViewBag.GrupodeProducto = new SelectList(db.Grupo, "id_grup", "nombre_grup");
-                List<Practica_Git.Models.Marca> marca = db.Marca.Where(m => m.id_grup_marca == idgpo).ToList();
+                ViewBag.GrupodeProducto = new SelectList(new BusCars().GetGrupos(), "id_grup", "nombre_grup");
+                List<MarcaProd> marca = new BusCars().GetMarcasProd().Where(m => m.id_grup_marca == idgpo).ToList();
                 ViewBag.MarcadeProducto = new SelectList(marca, "id_marca", "nombre_marca");
-                ViewBag.GrupodeProductohtml = new SelectList(db.Grupo, "id_grup", "nombre_grup");
+                ViewBag.GrupodeProductohtml = new SelectList(new BusCars().GetGrupos(), "id_grup", "nombre_grup");
 
-                List<Practica_Git.Models.Producto> producto = new List<Practica_Git.Models.Producto>();
+                List<Producto> producto = new BusCars().GetProductos();
                 ViewBag.Producto = new SelectList(producto, "id_prod", "nombre_prod");
             }
             else
             {
-                ViewBag.GrupodeProducto = new SelectList(db.Grupo, "id_grup", "nombre_grup");
-                List<Practica_Git.Models.Marca> marca = new List<Practica_Git.Models.Marca>();
+                ViewBag.GrupodeProducto = new SelectList(new BusCars().GetGrupos(), "id_grup", "nombre_grup");
+                List<MarcaProd> marca =new BusCars().GetMarcasProd();
                 ViewBag.MarcadeProducto = new SelectList(marca, "id_marca", "nombre_marca");
-                List<Practica_Git.Models.Producto> producto = new List<Practica_Git.Models.Producto>();
+                List<Producto> producto = new BusCars().GetProductos();
                 ViewBag.Producto = new SelectList(producto, "id_prod", "nombre_prod");
-                ViewBag.GrupodeProductohtml = new SelectList(db.Grupo, "id_grup", "nombre_grup");
+                ViewBag.GrupodeProductohtml = new SelectList(new BusCars().GetGrupos(), "id_grup", "nombre_grup");
             }
             List<Brachi.Bussines.BusPractica.Carro> lst = new BusCars().GetCarros();
             return View(lst);
@@ -78,14 +75,16 @@ namespace Practica_Git.Controllers
         }
         public ActionResult GetGrupos(int id)
         {
-            //return Json(db.Marca.Where(m => m.id_grup_marca == id).ToList(), JsonRequestBehavior.AllowGet);
-            var marca = db.Marca.Where(m => m.id_grup_marca == id).Select(n => new { id_marca = n.id_marca, nombre_marca = n.nombre_marca }).ToList();
+            //return Json(new BusCars().GetMarcasProd().Where(m => m.id_grup_marca == id).ToList(), JsonRequestBehavior.AllowGet);
+            var marca = new BusCars().GetMarcasProd().Where(m => m.id_grup_marca == id).Select(n => new { id_marca = n.id_marca, nombre_marca = n.nombre_marca }).ToList();
 
             return Json(marca, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetMarcas(int id)
         {
-            return Json(db.Producto.Where(p => p.id_marca_prod == id).ToList(), JsonRequestBehavior.AllowGet);
+            var prod = new BusCars().GetProductos().Where(p => p.id_marca_prod == id).Select(n => new { id_prod = n.id_prod, nombre_prod = n.nombre_prod}).ToList();
+
+            return Json(prod, JsonRequestBehavior.AllowGet);
         }
         public ActionResult About(int id)
         {
@@ -94,14 +93,13 @@ namespace Practica_Git.Controllers
             return View(car);
         }
         [HttpPost]
-        public ActionResult Create(Practica_Git.Models.Carro car)
+        public ActionResult Create(Carro car)
         {
             if (car.id_car == 0)
             {
                 var archivo = Request.Files[1];
                 archivo.SaveAs(Server.MapPath("~/images/" + archivo.FileName));
-                //dbc.Carro.Add(car);
-                dbw.SaveChanges();
+                Carro carro = new BusCars().CreateCarro(car);
             }
             else
             {
@@ -111,8 +109,8 @@ namespace Practica_Git.Controllers
                     var archivo = Request.Files[0];
                     archivo.SaveAs(Server.MapPath("~/images/" + archivo.FileName));
                 }
-                dbw.Entry(car).State = EntityState.Modified;
-                dbw.SaveChanges();
+                Carro carro = new BusCars().CreateCarro(car);
+
             }
             Response.StatusCode = 200;
             Response.StatusDescription = "Objeto Creado";
@@ -125,9 +123,9 @@ namespace Practica_Git.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(Practica_Git.Models.Usuario user)
+        public ActionResult Login(Usuario user)
         {
-            Brachi.Bussines.BusPractica.Usuario usuario = new BusCars().GetUsuario(user.nombre_usua, user.pass_usua);
+            Usuario usuario = new BusCars().GetUsuario(user.nombre_usua, user.pass_usua);
             if (usuario != null && usuario.estatus_usua)
             {
                 Session["Usuario"] = usuario;
