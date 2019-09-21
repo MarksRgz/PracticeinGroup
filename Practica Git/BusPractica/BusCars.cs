@@ -12,10 +12,11 @@ namespace Brachi.Bussines.BusPractica
 {
     public class BusCars
     {
-        SqlConnection con;
+        SqlConnection con, conu;
         public BusCars()
         {
             con = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLCarros"].ConnectionString);
+            conu = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLProductos"].ConnectionString);
         }
         public List<Carro> GetCarros()
         {
@@ -60,6 +61,15 @@ namespace Brachi.Bussines.BusPractica
             }
               
         }
+        public List<Usuario> GetUsuarios()
+        {
+            List<Usuario> lst = new List<Usuario>();
+            using (conu)
+            {
+                lst = conu.Query<Usuario>("spGetUsuarios").ToList();
+            }
+            return lst;
+        }
     }
 }
-// id_marca_car = car.marca.id_marca, id_modelo_car = car.modelo.id_modelo, 
+

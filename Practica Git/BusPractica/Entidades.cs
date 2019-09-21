@@ -35,4 +35,11 @@ namespace Brachi.Bussines.BusPractica
         public int id_modelo { get; set; }
         public string nombre_modelo { get; set; }
     }
+    public class Usuario
+    {
+        public int id_usua { get; set; }
+        public string nombre_usua { get; set; }
+        public int pass_usua { get; set; }
+        public bool estatus_usua { get; set; }
+    }
 }

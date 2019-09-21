@@ -7,12 +7,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+
 namespace Practica_Git.Controllers
 {
 
     public class GitPracticeController : Controller
     {
-        private EFProductosEntities db = new EFProductosEntities();
+        private ProductosWellEntities db = new ProductosWellEntities();
         private CarrosWellEntities dbw = new CarrosWellEntities();
         // GET: Home
         public ActionResult Index()
@@ -124,7 +126,8 @@ namespace Practica_Git.Controllers
         [HttpPost]
         public ActionResult Login(Practica_Git.Models.Usuario user)
         {
-            Practica_Git.Models.Usuario usuario = db.Usuario.Where(u => u.nombre_usua == user.nombre_usua && u.pass_usua == user.pass_usua && u.estatus_usua == user.estatus_usua).FirstOrDefault();
+            List<Brachi.Bussines.BusPractica.Usuario> lst = new BusCars().GetUsuarios();
+            Brachi.Bussines.BusPractica.Usuario usuario = lst.FirstOrDefault(l => l.nombre_usua == user.nombre_usua && l.pass_usua == user.pass_usua);
             if (usuario != null && user.estatus_usua)
             {
                 Session["Usuario"] = usuario;
