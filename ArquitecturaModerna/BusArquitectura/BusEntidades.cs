@@ -47,6 +47,7 @@ namespace Beneficia.BusArquitectura.Buss
         public int id_test { get; set; }
         public string nombre_test { get; set; }
         public string opinion_test { get; set; }
+        public string img_test { get; set; }
     }
     public class Usuario
     {

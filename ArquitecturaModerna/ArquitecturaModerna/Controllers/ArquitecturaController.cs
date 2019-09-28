@@ -17,7 +17,8 @@ namespace ArquitecturaModerna.Controllers
         }
         public ActionResult About()
         {
-            return View();
+            List<Testimonio> lst = new BusGlobal().GetTestimonios();
+            return View(lst);
         }
         public ActionResult Proyectos()
         {
