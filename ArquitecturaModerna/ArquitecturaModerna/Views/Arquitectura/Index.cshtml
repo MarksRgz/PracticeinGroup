@@ -1,43 +1,32 @@
-﻿<header>
+﻿@model Beneficia.BusArquitectura.Buss.IndexModelo
+<header>
     <div class="hero">
         <a class="navbar-brand" href="/Arquitectura/Index">
             <img src="~/img/logo.png" alt="">
         </a>
         <!--================ Carrousel =================-->
         <div class="owl-carousel owl-theme heroCarousel">
-            <div class="item">
-                <div class="hero__slide">
-                    <img src="~/img/hero-2.png" alt="">
-                    <div class="hero__slideContent text-center">
-                        <h1>Dream Heaven City este</h1>
-                        <p>If you are looking at blank cassettes on the web Lorem ipsum dolor sit amet, consectetur adipisicing  eiusmod tempor incididunt.</p>
-                        <a id="btnslide" class="btn btn--leftBorder btn--rightBorder">Details</a>
-                        <span class="hero__slideContent--right"></span>
+            @foreach (Beneficia.BusArquitectura.Buss.Slider item in Model.slider)
+            {
+                <div class="item">
+                    <div class="hero__slide">
+                        if (Model != null)
+                        {
+                        <img src="~/@item.img_slider" alt="">
+                        }
+
+                        <div class="hero__slideContent text-center">
+                            @if (Model != null)
+                            {
+                                <h1>@item.lugar_slider</h1>
+                                <p>@item.desc_slider</p>
+                            }
+                            <a id="btnslide" class="btn btn--leftBorder btn--rightBorder">Details</a>
+                            <span class="hero__slideContent--right"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="item">
-                <div class="hero__slide">
-                    <img src="~/img/hero-1.png" alt="">
-                    <div class="hero__slideContent text-center">
-                        <h1>Dream Heaven City</h1>
-                        <p>If you are looking at blank cassettes on the web Lorem ipsum dolor sit amet, consectetur adipisicing  eiusmod tempor incididunt.</p>
-                        <a class="btn btn--leftBorder btn--rightBorder" href="#/">Details</a>
-                        <span class="hero__slideContent--right"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="hero__slide">
-                    <img src="~/img/hero-3.png" alt="">
-                    <div class="hero__slideContent text-center">
-                        <h1>Dream Heaven City</h1>
-                        <p>If you are looking at blank cassettes on the web Lorem ipsum dolor sit amet, consectetur adipisicing  eiusmod tempor incididunt.</p>
-                        <a class="btn btn--leftBorder btn--rightBorder" href="#/">Details</a>
-                        <span class="hero__slideContent--right"></span>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
         <!--================ End of Carrousel =================-->
     </div>
@@ -130,22 +119,28 @@
         </div>
 
         <div class="row align-items-end pb-md-5 mb-4">
-            <div class="col-md-7 mb-4 mb-md-0">
-                <div class="portfolio__img">
-                    <img class="img-fluid" src="~/img/portfolio1.png" alt="">
+            @foreach (Beneficia.BusArquitectura.Buss.Proyecto item in Model.proyecto)
+            {
+                <div class="col-md-7 mb-4 mb-md-0">
+                    <div class="portfolio__img">
+                        @if (Model.proyecto != null)
+                        {
+                            <img class="img-fluid" src="~/@item.img_proyecto" alt="">
+                        }
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5 mb-5 pl-xl-5">
-                <h4 class="section-intro__title left-border">Diciembre, 2018</h4>
-                <h2 class="section-intro__subtitle small">Habitación Pura</h2>
-                <p>
-                    Su belleza obedece al concepto de los espacios fluidos, donde los techos planos y las ventanas permiten apreciar de manera hermosa el paisaje que rodea a la casa.
-
-                    Aquí Le Corbusier demostró la utilidad, y vigencia, de sus 5 puntos de la arquitectura.
-                </p>
-
-                <a class="btn btn--rightBorder mt-3" href="#/">Conoce más</a>
-            </div>
+                <div class="col-md-5 mb-5 pl-xl-5">
+                    @if (Model.proyecto != null)
+                    {
+                        <h4 class="section-intro__title left-border">@item.fecha_proyecto</h4>
+                        <h2 class="section-intro__subtitle small">@item.nombre_proyecto</h2>
+                        <p>
+                            @item.desc_proyecto
+                        </p>
+                    }
+                    <a class="btn btn--rightBorder mt-3" href="#/">Conoce más</a>
+                </div>
+            }
         </div>
 
         <div class="row align-items-end pb-md-5 mb-4">
@@ -159,38 +154,6 @@
             <div class="col-md-7 mb-4 mb-md-0 order-1 order-md-2">
                 <div class="portfolio__img">
                     <img class="img-fluid" src="~/img/portfolio2.png" alt="">
-                </div>
-            </div>
-        </div>
-
-        <div class="row align-items-end pb-md-5 mb-4">
-            <div class="col-md-7 mb-4 mb-md-0">
-                <div class="portfolio__img">
-                    <img class="img-fluid" src="~/img/portfolio3.png" alt="">
-                </div>
-            </div>
-
-            <div class="col-md-5 mb-5 pl-xl-5">
-                <h4 class="section-intro__title left-border">Enero, 2015</h4>
-                <h2 class="section-intro__subtitle small">Torre Mayor</h2>
-                <p>La Torre Mayor es un rascacielos ubicado en la Ciudad de México, desarrollado por el canadiense Paul Reichmann. Se encuentra ubicada en el número 505 de la avenida Paseo de la Reforma, en el espacio ocupado anteriormente por el Cine Chapultepec y cerca del Bosque de Chapultepec, en la delegación Cuauhtémoc.</p>
-
-                <a class="btn btn--rightBorder mt-3" href="#/">Conoce más</a>
-            </div>
-        </div>
-
-        <div class="row align-items-end pb-md-5 mb-4">
-            <div class="col-md-5 mb-5 pr-xl-5 order-2 order-md-1">
-                <h4 class="section-intro__title left-border">December, 2018</h4>
-                <h2 class="section-intro__subtitle small">Escaleras convencionales</h2>
-                <p>Hay muchas formas de street art por ahí, pero las que crean ilusiones ópticas, o las que sólo se pueden ver desde un cierto ángulo o desde cierta distancia, parecen inspirar mayor deleite y sorpresa. Las escaleras son algunos de los lienzos más atrevidos para los artistas callejeros, ideales para decoraciones abstractas, así como para retratos realistas que sólo son visibles desde lejos.</p>
-
-                <a class="btn btn--rightBorder mt-3" href="#/">Conoce más</a>
-            </div>
-
-            <div class="col-md-7 order-1 order-md-2 mb-4 mb-md-0">
-                <div class="portfolio__img">
-                    <img class="img-fluid" src="~/img/portfolio4.png" alt="">
                 </div>
             </div>
         </div>
@@ -296,7 +259,7 @@
 <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
 
 <script>
-         $("#btnslide").click(function () {
-                $("#heroCarousel").carousel("cycle");
-         });
+    $("#btnslide").click(function () {
+        $("#heroCarousel").carousel("cycle");
+    });
 </script>

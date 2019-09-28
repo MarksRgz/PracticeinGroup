@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Beneficia.BusArquitectura.Buss;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace ArquitecturaModerna.Controllers
         // GET: Arquitectura
         public ActionResult Index()
         {
-            return View();
+            IndexModelo lst = new BusGlobal().GetModeloIndex();
+            return View(lst);
         }
         public ActionResult About()
         {
@@ -19,15 +21,18 @@ namespace ArquitecturaModerna.Controllers
         }
         public ActionResult Proyectos()
         {
-            return View();
+            List<Proyecto> lst = new BusGlobal().GetProyectos();
+            return View(lst);
         }
         public ActionResult Servicios()
         {
-            return View();
+            List<Servicio> lst = new BusGlobal().GetServicios();
+            return View(lst);
         }
         public ActionResult Blog()
         {
-            return View();
+            List<Blog> lst = new BusGlobal().GetBlogs();
+            return View(lst);
         }
     }
 }
