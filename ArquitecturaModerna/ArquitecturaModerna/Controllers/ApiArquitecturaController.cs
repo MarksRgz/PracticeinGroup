@@ -79,7 +79,7 @@ namespace ArquitecturaModerna.Controllers
         {
             var lst = new BusGlobal().GetProyectos();
             Proyecto proye = lst.FirstOrDefault(s => s.id_proyecto == idp);
-            if (lst == null)
+            if (proye == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
@@ -132,7 +132,7 @@ namespace ArquitecturaModerna.Controllers
         {
             var lst = new BusGlobal().GetServicios();
             Servicio serv= lst.FirstOrDefault(s => s.id_serv == idp);
-            if (lst == null)
+            if (serv == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
@@ -168,6 +168,59 @@ namespace ArquitecturaModerna.Controllers
             if (servicio > 0)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, servicio);
+            }
+            return Request.CreateResponse(HttpStatusCode.Conflict, false);
+        }
+
+        //API BLOG
+        [Route("Blog"), BasicAuthorize]
+        public HttpResponseMessage GetBlogs()
+        {
+            var lst = new BusGlobal().GetBlogs();
+            return Request.CreateResponse(HttpStatusCode.OK, lst);
+        }
+
+        [Route("Blog"), BasicAuthorize]
+        public HttpResponseMessage GetBlog(int idp)
+        {
+            var lst = new BusGlobal().GetBlogs();
+            Blog blog= lst.FirstOrDefault(b => b.id_blog == idp);
+            if (blog == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, blog);
+        }
+
+        [HttpPut, Route("Blog")]
+        public HttpResponseMessage PutBlog(int idp, Blog blog)
+        {
+            var blo = new BusGlobal().UpdateBlog(blog);
+            if (blo > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.Accepted, blo);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotModified, false);
+        }
+
+        [HttpPost, Route("Blog"), BasicAuthorize]
+        public HttpResponseMessage PostBlog(Blog blog)
+        {
+            Blog blo= new BusGlobal().CreateBlog(blog);
+            if (blo != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.Created, blo);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, false);
+        }
+
+        [HttpDelete, Route("Blog")]
+        public HttpResponseMessage DeleteBlog(int idp)
+        {
+            int blog = new BusGlobal().DeleteBlog(idp);
+            if (blog > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, blog);
             }
             return Request.CreateResponse(HttpStatusCode.Conflict, false);
         }
