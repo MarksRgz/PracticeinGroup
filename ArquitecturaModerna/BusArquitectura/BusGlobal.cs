@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Beneficia.BusArquitectura.Buss
         {
             con = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLArquitecturas"].ConnectionString);
         }
+        //Métodos de llenado de vistas---------------------------------------------------------------------------
         public List<Slider> GetSliders()
         {
             try
@@ -31,6 +33,51 @@ namespace Beneficia.BusArquitectura.Buss
             catch (Exception ex)
             {
                 throw new ApplicationException("Error spGetSliders: " + ex.Message);
+            }
+        }
+        public int UpdateSlider(Slider slide)
+        {
+            try
+            {
+                using (con)
+                {
+                    var filas = con.Execute(("spUpdateSlider"), new { id_slider = slide.id_slider, lugar_slider = slide.lugar_slider, desc_slider = slide.desc_slider, img_slider = slide.img_slider }, commandType: CommandType.StoredProcedure);
+                    return filas;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error spUpdateSlider: " + ex.Message);
+            }
+        }
+        public Slider CreateSlider(Slider slide)
+        {
+            try
+            {
+                using (con)
+                {
+                    Slider slid = con.Query<Slider>(("spCreateSlider"), new { lugar_slider = slide.lugar_slider, desc_slider = slide.desc_slider, img_slider = slide.img_slider }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    return slid;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error spCreateSlider: " + ex.Message);
+            }
+        }
+        public int DeleteSlider(int idp)
+        {
+            try
+            {
+                using (con)
+                {
+                    var filas = con.Execute(("spDeleteSlider"), new { id_slider = idp }, commandType: CommandType.StoredProcedure);
+                    return filas;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error spDeleteSlider:" + ex.Message);
             }
         }
         public IndexModelo GetModeloIndex()
@@ -67,6 +114,7 @@ namespace Beneficia.BusArquitectura.Buss
                 throw new ApplicationException("Error spGetProyectos: " + ex.Message);
             }
         }
+        
         public List<Servicio> GetServicios()
         {
             try
@@ -131,6 +179,6 @@ namespace Beneficia.BusArquitectura.Buss
                 throw new ApplicationException("Error spGetUsuario: " + ex.Message);
             }
         }
+
     }
 }
-
