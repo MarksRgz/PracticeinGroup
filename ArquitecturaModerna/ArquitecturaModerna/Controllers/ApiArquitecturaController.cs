@@ -12,6 +12,7 @@ namespace ArquitecturaModerna.Controllers
     [RoutePrefix("api/arquitectura")]
     public class ApiGitPracticeController : ApiController
     {
+        //API SLIDER
         [Route(""), BasicAuthorize]
 
         public HttpResponseMessage GetSliders()
@@ -65,6 +66,7 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.Conflict, false);
         }
 
+        //API PROYECTO
         [Route("Proyecto"), BasicAuthorize]
         public HttpResponseMessage GetProyectos()
         {
@@ -113,6 +115,59 @@ namespace ArquitecturaModerna.Controllers
             if (proyecto > 0)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, proyecto);
+            }
+            return Request.CreateResponse(HttpStatusCode.Conflict, false);
+        }
+
+        //API SERVICIO
+        [Route("Servicio"), BasicAuthorize]
+        public HttpResponseMessage GetServicios()
+        {
+            var lst = new BusGlobal().GetServicios();
+            return Request.CreateResponse(HttpStatusCode.OK, lst);
+        }
+
+        [Route("Servicio"), BasicAuthorize]
+        public HttpResponseMessage GetServicio(int idp)
+        {
+            var lst = new BusGlobal().GetServicios();
+            Servicio serv= lst.FirstOrDefault(s => s.id_serv == idp);
+            if (lst == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, serv);
+        }
+
+        [HttpPut, Route("Servicio")]
+        public HttpResponseMessage PutServicio(int idp, Servicio serv)
+        {
+            var servicio = new BusGlobal().UpdateServicio(serv);
+            if (servicio > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.Accepted, servicio);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotModified, false);
+        }
+
+        [HttpPost, Route("Servicio"), BasicAuthorize]
+        public HttpResponseMessage PostServicio(Servicio serv)
+        {
+           Servicio servicio= new BusGlobal().CreateServicio(serv);
+            if (servicio!= null)
+            {
+                return Request.CreateResponse(HttpStatusCode.Created, servicio);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, false);
+        }
+
+        [HttpDelete, Route("Servicio")]
+        public HttpResponseMessage DeleteServicio(int idp)
+        {
+            int servicio = new BusGlobal().DeleteServicio(idp);
+            if (servicio > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, servicio);
             }
             return Request.CreateResponse(HttpStatusCode.Conflict, false);
         }
