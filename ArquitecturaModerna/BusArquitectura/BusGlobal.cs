@@ -114,7 +114,51 @@ namespace Beneficia.BusArquitectura.Buss
                 throw new ApplicationException("Error spGetProyectos: " + ex.Message);
             }
         }
-        
+        public int UpdateProyecto(Proyecto proye)
+        {
+            try
+            {
+                using (con)
+                {
+                    var filas = con.Execute(("spUpdateProyecto"), new { id_proyecto = proye.id_proyecto, nombre_proyecto = proye.nombre_proyecto, desc_proyecto = proye.desc_proyecto, img_proyecto = proye.img_proyecto, fecha_proyecto = proye.fecha_proyecto, costo_proyecto = proye.costo_proyecto }, commandType: CommandType.StoredProcedure);
+                    return filas;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error spUpdateProyecto" + ex.Message);
+            }
+        }
+        public Proyecto CreateProyecto(Proyecto proye)
+        {
+            try
+            {
+                using (con)
+                {
+                    Proyecto proyecto = con.Query<Proyecto>(("spCreateProyecto"), new { nombre_proyecto = proye.nombre_proyecto, desc_proyecto = proye.desc_proyecto, img_proyecto = proye.img_proyecto, fecha_proyecto = proye.fecha_proyecto, costo_proyecto = proye.costo_proyecto }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    return proyecto;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error spCreateProyecto" + ex.Message);
+            }
+        }
+        public int DeleteProyecto(int idp)
+        {
+            try
+            {
+                using (con)
+                {
+                    var filas = con.Execute(("spDeleteProyecto"), new { id_proyecto = idp }, commandType: CommandType.StoredProcedure);
+                    return filas;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error spDeleteProyecto" + ex.Message);
+            }
+        }
         public List<Servicio> GetServicios()
         {
             try
