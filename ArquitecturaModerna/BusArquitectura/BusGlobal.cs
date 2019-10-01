@@ -115,20 +115,20 @@ namespace Beneficia.BusArquitectura.Buss
                 throw new ApplicationException("Error spGetTestimonios: " + ex.Message);
             }
         }
-        public List<Usuario> GetUsuarios()
+        public Usuario GetUsuario(string nombre, string password)
         {
             try
             {
-                List<Usuario> lst = new List<Usuario>();
+                Usuario usua = new Usuario();
                 using (con)
                 {
-                    lst = con.Query<Usuario>("spGetUsuarios").ToList();
+                    usua = con.Query<Usuario>("spGetUsuario", new { nombre = nombre, password = password }, commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
                 }
-                return lst;
+                return usua;
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error spGetUsuarios: " + ex.Message);
+                throw new ApplicationException("Error spGetUsuario: " + ex.Message);
             }
         }
     }
