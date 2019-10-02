@@ -10,18 +10,10 @@
             {
                 <div class="item">
                     <div class="hero__slide">
-                        if (Model != null)
-                        {
                         <img src="~/@item.img_slider" alt="">
-                        }
-
                         <div class="hero__slideContent text-center">
-                            @if (Model != null)
-                            {
-                                <h1>@item.lugar_slider</h1>
-                                <p>@item.desc_slider</p>
-                            }
-                            <a id="btnslide" class="btn btn--leftBorder btn--rightBorder">Details</a>
+                            <h1>@item.lugar_slider</h1>
+                            <p>@item.desc_slider</p>
                             <span class="hero__slideContent--right"></span>
                         </div>
                     </div>
@@ -54,7 +46,7 @@
                     Se caracteriza por la simplificación de formas, la ausencia de ornamento y la estética de distintas tendencias del arte moderno, como son el cubismo, expresionismo, futurismo, entre algunas otras.
                 </p>
                 <p>La utilización de vitrales y grandes ventanales, es otra característica fundamental de este tipo de arquitectura. Esto lo podemos ver en la Ópera de Sydney, en Australia, donde se llevan a cabo los conciertos de ópera, ballet y teatro más prestigiosos del mundo.</p>
-                <a class="btn btn--rightBorder mt-4" href="#/">Leer más</a>
+                <a class="btn btn--rightBorder mt-4" href="/Arquitectura/About">Leer más</a>
             </div>
         </div>
     </div>
@@ -116,7 +108,78 @@
             <h2 class="section-intro__subtitle bottom-border">
                 Últimos proyectos completados
             </h2>
+            <label title="AgregarProyecto" class=" btn btn-outline-default" data-toggle="modal" data-target="#exampleModal"><span class="ti-layout-tab glyphicon-th-large p-3" sm> Nuevo proyecto </span></label>
         </div>
+
+        <!-- Modal agregar proyecto -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <form action="Create" method="post" enctype="multipart/form-data">
+                        @Model.proyecto
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">.:Agregar Proyecto:.</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        Nombre de Proyecto:
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" required name="nombre_proyecto" value="" />
+                                            <input type="hidden" name="id_proyecto" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Descripción:
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" required name="desc_proyecto" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Imagen:
+                                        <div class="col-md-10">
+                                            <input type="file" name="imageProyecto" class="form-control"/>
+                                            <input type="hidden" name="img_proyecto" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Fecha:
+                                        <div class="col-md-10">
+                                            <input type="date" class="form-control" required name="fecha_proyecto" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Costo:
+                                        <div class="col-md-10">
+                                            <input type="text" maxlength="2" class="form-control" required name="costo_proyecto" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Create" class="btn btn-default" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="ti-check btn-primary p-2"> Guardar</button>
+                            <button type="button" class="ti-close btn-danger p-2" data-dismiss="modal"> Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
         <div class="row align-items-end pb-md-5 mb-4">
             @{int contador = 2; }
@@ -135,23 +198,21 @@
                         <p>
                             @item.desc_proyecto
                         </p>
-                        <a class="btn btn--rightBorder mt-3" href="#/">Conoce más</a>
                     </div>
                     contador++;
                 }
                 else
                 {
-                    <div class="col-md-5 mb-5 pr-xl-5 order-2 order-md-1">
-                        <h4 class="section-intro__title left-border">@item.fecha_proyecto</h4>
-                        <h2 class="section-intro__subtitle small">@item.nombre_proyecto</h2>
-                        <p>
-                            @item.desc_proyecto
-                        </p>
-                        <a class="btn btn--rightBorder mt-3" href="#/">Conoce más</a>
-                    </div>
-                    <div class="col-md-7 mb-4 mb-md-0 order-1 order-md-2">
-                        <div class="portfolio__img">
-                            <img class="img-fluid" src="~/@item.img_proyecto" alt="">
+                    <div class="row align-items-end pb-md-5 mb-4">
+                        <div class="col-md-5 mb-5 pr-xl-5 order-2 order-md-1">
+                            <h4 class="section-intro__title left-border">@item.fecha_proyecto</h4>
+                            <h2 class="section-intro__subtitle small">@item.nombre_proyecto</h2>
+                            <p>@item.desc_proyecto</p>
+                        </div>
+                        <div class="col-md-7 mb-4 mb-md-0 order-1 order-md-2">
+                            <div class="portfolio__img">
+                                <img class="img-fluid" src="~/@item.img_proyecto" alt="">
+                            </div>
                         </div>
                     </div>
                     contador++;
@@ -160,7 +221,7 @@
             }
         </div>
         <div class="text-center pt-2">
-            <button class="btn btn--rightBorder btn--leftBorder">Más proyectos</button>
+            <a class="btn btn--rightBorder mt-4" href="/Arquitectura/Proyectos">Más Proyectos</a>
         </div>
     </div>
 </section>
@@ -183,7 +244,6 @@
         </div>
     </div>
 </section>
-<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
 
 <script>
     $("#btnslide").click(function () {

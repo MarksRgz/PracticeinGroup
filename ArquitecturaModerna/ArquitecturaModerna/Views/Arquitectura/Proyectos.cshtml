@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model List<Beneficia.BusArquitectura.Buss.Proyecto>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <body>
     <header class="hero-banner project-bg">
@@ -7,87 +8,87 @@
         </a>
 
         <div class="container">
-            <h2 class="section-intro__subtitle">Our Projects</h2>
+            <h2 class="section-intro__subtitle">Proyectos</h2>
             <div class="btn-group breadcrumb">
                 <a href="/Arquitectura/Index" class="btn">Home</a>
                 <span class="btn btn--rightBorder">Projects</span>
             </div>
         </div>
     </header>
-
+    
+    <!--================ Portafolio de proyectos =================-->
     <section class="portfolio section-margin">
         <div class="container">
             <div class="section-intro">
-                <h4 class="section-intro__title">OUR PORTFOLIO</h4>
-                <h2 class="section-intro__subtitle bottom-border">Latest Completed Projects</h2>
+                <h4 class="section-intro__title">Nuestro portafolio</h4>
+                <h2 class="section-intro__subtitle bottom-border">
+                    Últimos proyectos completados
+                </h2>
             </div>
 
-            <div class="row align-items-end pb-md-5 mb-4">
-                <div class="col-md-7 mb-4 mb-md-0">
-                    <div class="portfolio__img">
-                        <img class="img-fluid" src="~/img/proye3.png" alt="">
-                    </div>
-                </div>
-                <div class="col-md-5 mb-5 pl-xl-5">
-                    <h4 class="section-intro__title left-border">December, 2018</h4>
-                    <h2 class="section-intro__subtitle small">Pure Bedroom Architecture</h2>
-                    <p>If you are looking at blank cassettes on the web lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+            <label title="AgregarProyecto" class=" btn btn-outline-default" data-toggle="modal" data-target="#exampleModal"><span class="ti-layout-tab glyphicon-th-large p-3" sm> Nuevo Proyecto </span></label>
 
-                    <a class="btn btn--rightBorder mt-3" href="#/">Read More</a>
-                </div>
-            </div>
-
-            <div class="row align-items-end pb-md-5 mb-4">
-                <div class="col-md-5 mb-5 pr-xl-5 order-2 order-md-1">
-                    <h4 class="section-intro__title left-border">December, 2018</h4>
-                    <h2 class="section-intro__subtitle small">Pure Bedroom Architecture</h2>
-                    <p>If you are looking at blank cassettes on the web lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-
-                    <a class="btn btn--rightBorder mt-3" href="#/">Read More</a>
-                </div>
-                <div class="col-md-7 mb-4 mb-md-0 order-1 order-md-2">
-                    <div class="portfolio__img">
-                        <img class="img-fluid" src="~/img/proye1.png" alt="">
+            <!-- Modal agregar proyecto -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h1>hola modal proyecto</h1>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="row align-items-end pb-md-5 mb-4">
-                <div class="col-md-7 mb-4 mb-md-0">
-                    <div class="portfolio__img">
-                        <img class="img-fluid" src="~/img/proye2.png" alt="">
-                    </div>
-                </div>
-
-                <div class="col-md-5 mb-5 pl-xl-5">
-                    <h4 class="section-intro__title left-border">December, 2018</h4>
-                    <h2 class="section-intro__subtitle small">Pure Bedroom Architecture</h2>
-                    <p>If you are looking at blank cassettes on the web lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-
-                    <a class="btn btn--rightBorder mt-3" href="#/">Read More</a>
-                </div>
-            </div>
-
-            <div class="row align-items-end pb-md-5 mb-4">
-                <div class="col-md-5 mb-5 pr-xl-5 order-2 order-md-1">
-                    <h4 class="section-intro__title left-border">December, 2018</h4>
-                    <h2 class="section-intro__subtitle small">Pure Bedroom Architecture</h2>
-                    <p>If you are looking at blank cassettes on the web lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-
-                    <a class="btn btn--rightBorder mt-3" href="#/">Read More</a>
-                </div>
-
-                <div class="col-md-7 order-1 order-md-2 mb-4 mb-md-0">
-                    <div class="portfolio__img">
-                        <img class="img-fluid" src="~/img/portfolio4.png" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center pt-2">
-                <button class="btn btn--rightBorder btn--leftBorder">Load More Projects</button>
+                @{int contador = 2; }
+                @foreach (Beneficia.BusArquitectura.Buss.Proyecto item in Model)
+                {
+                    if (contador % 2 == 0)
+                    {
+                        <div class="col-md-7 mb-4 mb-md-0">
+                            <div class="portfolio__img">
+                                <img class="img-fluid" src="~/@item.img_proyecto" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-5 mb-5 pl-xl-5">
+                            <h4 class="section-intro__title left-border">@item.fecha_proyecto</h4>
+                            <h2 class="section-intro__subtitle small">@item.nombre_proyecto</h2>
+                            <p>
+                                @item.desc_proyecto
+                            </p>
+                        </div>
+                        contador++;
+                    }
+                    else
+                    {
+                        <div class="row align-items-end pb-md-5 mb-4">
+                            <div class="col-md-5 mb-5 pr-xl-5 order-2 order-md-1">
+                                <h4 class="section-intro__title left-border">@item.fecha_proyecto</h4>
+                                <h2 class="section-intro__subtitle small">@item.nombre_proyecto</h2>
+                                <p>@item.desc_proyecto</p>
+                            </div>
+                            <div class="col-md-7 mb-4 mb-md-0 order-1 order-md-2">
+                                <div class="portfolio__img">
+                                    <img class="img-fluid" src="~/@item.img_proyecto" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        contador++;
+                    }
+                }
             </div>
         </div>
     </section>
+    <!--================ End Portafolio de proyectos =================-->
 </body>
 </html>

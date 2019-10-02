@@ -77,5 +77,9 @@ namespace ArquitecturaModerna.Controllers
             Session.Clear();
             return RedirectToAction("Login");
         }
+        public ActionResult CrearProye()
+        {
+            return View();
+        }
     }
 }
