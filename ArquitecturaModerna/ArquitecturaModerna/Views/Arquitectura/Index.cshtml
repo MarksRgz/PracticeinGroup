@@ -116,62 +116,55 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <form action="Create" method="post" enctype="multipart/form-data">
-                        @Model.proyecto
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">.:Agregar Proyecto:.</h5>
+                        <div class="modal-header" style="background-color: aquamarine; color: darkslategrey;">
+                            <h5 class="modal-title" id="exampleModalLabel" >.:Agregar Proyecto:.</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <div>
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        Nombre de Proyecto:
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" required name="nombre_proyecto" value="" />
-                                            <input type="hidden" name="id_proyecto" value="" />
-                                        </div>
-                                    </div>
+                        <div class="modal-body" style="background-color:  lightseagreen; color: black;">
+                            <div class="row">
 
-                                    <div class="form-group">
-                                        Descripción:
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" required name="desc_proyecto" value="" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        Imagen:
-                                        <div class="col-md-10">
-                                            <input type="file" name="imageProyecto" class="form-control"/>
-                                            <input type="hidden" name="img_proyecto" value="" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        Fecha:
-                                        <div class="col-md-10">
-                                            <input type="date" class="form-control" required name="fecha_proyecto" value="" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        Costo:
-                                        <div class="col-md-10">
-                                            <input type="text" maxlength="2" class="form-control" required name="costo_proyecto" value="" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            <input type="submit" value="Create" class="btn btn-default" />
-                                        </div>
+                                <div class="form-group col-8">
+                                    Nombre de Proyecto:
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" required name="nombre_proyecto" value="" />
+                                        <input type="hidden" name="id_proyecto" value="" />
                                     </div>
                                 </div>
+
+                                <div class="form-group col-4">
+                                    Costo:
+                                    <div class="col-md-10">
+                                        <input type="text" maxlength="2" class="form-control" required name="costo_proyecto" value="" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    Descripción:
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" required name="desc_proyecto" value="" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-8">
+                                    Imagen:
+                                    <div class="col-md-10">
+                                        <input type="file" name="imageProyecto" class="form-control" />
+                                        <input type="hidden" name="img_proyecto" value="" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-4">
+                                    Fecha:
+                                    <div class="col-md-10">
+                                        <input type="date" class="form-control" required name="fecha_proyecto" value="" />
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer" style="background-color: lightslategrey;">
                             <button type="button" class="ti-check btn-primary p-2"> Guardar</button>
                             <button type="button" class="ti-close btn-danger p-2" data-dismiss="modal"> Close</button>
                         </div>
