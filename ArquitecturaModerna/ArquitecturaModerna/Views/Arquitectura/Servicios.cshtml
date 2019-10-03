@@ -33,41 +33,42 @@
             </div>
             <br />
 
-
             <!-- Modal agregar proyecto -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
-                        <div class="modal-header" style="background-color: aquamarine; color: darkslategrey;">
-                            <h5 class="modal-title" id="exampleModalLabel">.:Agregar Servicio:.</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" style="background-color:  lightseagreen; color: black;">
-                            <div class="row">
-
-                                <div class="form-group col-8">
-                                    Nombre de Servicio:
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control" required name="nombre_serv" value="" />
-                                        <input type="hidden" name="id_serv" value="" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-12">
-                                    Descripción:
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control" required name="desc_serv" value="" />
-                                    </div>
-                                </div>
-
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="modal-header" style="background-color: aquamarine; color: darkslategrey;">
+                                <h5 class="modal-title" id="exampleModalLabel">.:Agregar Servicio:.</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </div>
-                        <div class="modal-footer" style="background-color: lightslategrey;">
-                            <button type="button" class="ti-check btn-primary p-2"> Guardar</button>
-                            <button type="button" class="ti-close btn-danger p-2" data-dismiss="modal"> Close</button>
-                        </div>
+                            <div class="modal-body" style="background-color:  lightseagreen; color: black;">
+                                <div class="row">
+
+                                    <div class="form-group col-8">
+                                        Nombre de Servicio:
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" required name="nombre_serv" value="" />
+                                            <input type="hidden" name="id_serv" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        Descripción:
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" required name="desc_serv" value="" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="background-color: lightslategrey;">
+                                <label id="btnSave" class="btn" style="background-color: black; color: white;">Guardar</label>
+                                <button type="button" class="ti-close btn-danger p-2" data-dismiss="modal"> Close</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -104,3 +105,30 @@
     </section>
 </body>
 </html>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+        });
+        $('#btnSave').on('click', function () {
+            'use strict'
+            var data = {
+                nombre_serv: $('input[name=nombre_serv]').val(),
+                desc_serv: $('input[name=desc_serv]').val()
+            };
+            console.log('Data:', data);
+            $.ajax({
+                type: "POST",
+                url: '/Arquitectura/CreateS',
+                data: data,
+                dataType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+}

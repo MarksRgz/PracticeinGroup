@@ -161,7 +161,6 @@
     <Content Include="Views\Arquitectura\Servicios.cshtml" />
     <Content Include="Views\Arquitectura\Blog.cshtml" />
     <Content Include="Views\Arquitectura\Login.cshtml" />
-    <Content Include="Views\Arquitectura\CrearServicio.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

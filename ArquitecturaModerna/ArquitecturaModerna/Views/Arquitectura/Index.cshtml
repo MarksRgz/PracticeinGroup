@@ -115,9 +115,9 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="Create" method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data">
                         <div class="modal-header" style="background-color: aquamarine; color: darkslategrey;">
-                            <h5 class="modal-title" id="exampleModalLabel" >.:Agregar Proyecto:.</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">.:Agregar Proyecto:.</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -165,14 +165,13 @@
                             </div>
                         </div>
                         <div class="modal-footer" style="background-color: lightslategrey;">
-                            <button type="button" class="ti-check btn-primary p-2"> Guardar</button>
+                            <label id="btnSave" class="btn" style="background-color: black; color: white;">Guardar</label>
                             <button type="button" class="ti-close btn-danger p-2" data-dismiss="modal"> Close</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
 
         <div class="row align-items-end pb-md-5 mb-4">
             @{int contador = 2; }
@@ -237,9 +236,33 @@
         </div>
     </div>
 </section>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
 
-<script>
-    $("#btnslide").click(function () {
-        $("#heroCarousel").carousel("cycle");
-    });
-</script>
+        });
+        $('#btnSave').on('click', function () {
+            'use strict'
+            var data = {
+                nombre_proyecto: $('input[name=nombre_proyecto]').val(),
+                costo_proyecto: $('input[name=costo_proyecto]').val(),
+                desc_proyecto: $('input[name=desc_proyecto]').val(),
+                img_proyecto: $('input[name=img_proyecto]').val(),
+                fecha_proyecto: $('input[name=fecha_proyecto]').val(),
+            };
+            console.log('Data:', data);
+            $.ajax({
+                type: "POST",
+                url: '/Arquitectura/CreateP',
+                data: data,
+                dataType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+}

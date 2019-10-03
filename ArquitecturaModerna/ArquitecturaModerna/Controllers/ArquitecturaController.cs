@@ -77,9 +77,31 @@ namespace ArquitecturaModerna.Controllers
             Session.Clear();
             return RedirectToAction("Login");
         }
-        public ActionResult CrearServicio()
+        [HttpPost]
+        public ActionResult CreateP(Proyecto p)
         {
-            return View();
+            p.img_proyecto = "proye1.png";
+            Proyecto proye = new BusGlobal().CreateProyecto(p);
+            
+            Response.StatusCode = 200;
+            Response.StatusDescription = "Objeto creado";
+            return Json(proye, "application/json", JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult CreateS(Servicio s)
+        {
+            Servicio serv = new BusGlobal().CreateServicio(s);
+            Response.StatusCode = 200;
+            Response.StatusDescription = "Objeto creado";
+            return Json(s, "application/json", JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult CreateB(Blog b)
+        {
+            Blog blog = new BusGlobal().CreateBlog(b);
+            Response.StatusCode = 200;
+            Response.StatusDescription = "Objeto creado";
+            return Json(b, "application/json", JsonRequestBehavior.AllowGet);
         }
     }
 }
