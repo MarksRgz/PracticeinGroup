@@ -24,7 +24,7 @@ var url = location.origin + '/api/blog';
             };
 
             $scope.AddBlog = function (blog) {
-                if (blog.id_blog === '') {
+                if (blog.id_blog === undefined) {
                     console.log("Blog de Alta :", blog);
                     $http({
                         url: url,
@@ -36,6 +36,7 @@ var url = location.origin + '/api/blog';
                         $scope.blogs.push(response.data);
                         $scope.blog = {};
                         $('#exampleModal').modal('hide');
+                        $('#btnDelete').hide();
                     }, function (error) {
                         console.log(error);
                     });
@@ -51,12 +52,31 @@ var url = location.origin + '/api/blog';
                         console.log(response);
                         $scope.blog = {};
                         $('#exampleModal').modal('hide');
+                        $('#btnDelete').show();
                     }, function (error) {
                         console.log(error);
                     });
                 }
 
             };
+            $scope.DeleteBlog = function (blog) {
+                if (blog.id_blog !== '') {
+                    console.log('Blog a eliminar');
+                    $http({
+                        url: url + '?idp=' + blog.id_blog,
+                        method: "DELETE",
+                        headers: { Authorization: 'Basic U3VibmV0OjY3ODk=' },
+                        data: blog
+                    }).then(function (response) {
+                        console.log(response);
+                        $scope.blog = {};
+                        $('#exampleModal').modal('hide');
+                    }, function (error) {
+                        console.log(error);
+                    });
+                }
+
+            }
 
             $scope.OpenModalEdit = function (blog) {
                 $('#exampleModal').modal('show');
