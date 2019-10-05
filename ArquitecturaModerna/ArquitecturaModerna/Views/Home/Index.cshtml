@@ -3,91 +3,328 @@
     ViewBag.Title = "Index";
 }
 <div id="divMain" ng-app="MyAPI" ng-controller="BlogController as bc" ng-init="bc.CargaInicial()">
-    <ul>
-        <li ng-repeat="blog in bc.blogs">
-            {{blog.nombre_blog}}
-        </li>
-    </ul>
-
-    <section class="about section-margin mb-5">
+    <header class="hero-banner project-bg">
+        <a class="navbar-brand" href="/Arquitectura/index">
+            <img src="~/img/logo.png" alt="">
+        </a>
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-5">
-                    <div class="about__img text-center text-md-left mb-5 mb-md-0">
-                        <img class="img-fluid" src="~/img/about.png" alt="">
-                        <a href="/Arquitectura/About" class="about__img__date text-center">
-                            <h3>26</h3>
-                            <p>Años <br> de Creatividad</p>
-                        </a>
+            <h2 class="section-intro__subtitle">Blog Home</h2>
+            <div class="btn-group breadcrumb">
+                <a href="/Arquitectura/index" class="btn">Home</a>
+                <span class="btn btn--rightBorder">Blog</span>
+            </div>
+        </div>
+    </header>
+    <br />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <input type="text" class="form-control" ng-model="bc.filtro" value="" />
+            </div>
+            <div class="col-lg-4">
+                <label title="AgregarBlog" ng-click="bc.ClearModal()" class=" btn btn-outline-default" data-toggle="modal" data-target="#exampleModal"><span class="ti-layout-tab glyphicon-th-large p-3" sm> Nuevo Blog </span></label>
+            </div>
+        </div>
+    </div>
+    <!-- Start post-content Area -->
+    <section class="post-content-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post row" ng-repeat="blog in bc.blogs | filter : bc.filtro">
+                        <div class="col-lg-3  col-md-3 meta-details">
+                            <ul class="tags">
+                                <li><a href="#">Comida,</a></li>
+                                <li><a href="#">Tecnología,</a></li>
+                                <li><a href="#">Politica,</a></li>
+                                <li><a href="#">Lifestyle</a></li>
+                            </ul>
+                            <div class="user-details row">
+                                <p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{blog.nombre_blog}}</a> <span class="lnr lnr-user"></span></p>
+                                <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{blog.fecha_blog | date : 'dd/MM/yyyy'}}</a> <span class="lnr lnr-calendar-full"></span></p>
+                                <p class="view col-lg-12 col-md-12 col-6"><a href="#">{{blog.vistas_blog}} M Views</a> <span class="lnr lnr-eye"></span></p>
+                                <p class="comments col-lg-12 col-md-12 col-6"><a href="#">{{blog.comen_blog}} Comments</a> <span class="lnr lnr-bubble"></span></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 ">
+                            <div class="feature-img">
+                                <img class="img-fluid" ng-src="~/{{blog.img_blog}}" alt="">
+                            </div>
+                            <a class="posts-title" href="#/"><h3>{{blog.titulo_blog}}</h3></a>
+                            <p class="excert">{{blog.desc_blog}}</p>
+                            <a href="#/" ng-click="bc.OpenModalEdit(blog)" class="primary-btn">Editar</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-7 pl-xl-5">
-                    <div class="section-intro">
-                        <h4 class="section-intro__title">sobre nuestra compañia</h4>
-                        <h2 class="section-intro__subtitle">Hemos estado creando <br> algo impresionante desde 1992</h2>
+                <div class="col-lg-4 sidebar-widgets">
+                    <div class="widget-wrap">
+                        <div class="single-sidebar-widget search-widget">
+                            <form class="search-form" action="#">
+                                <input placeholder="Search Posts" name="search" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="single-sidebar-widget user-info-widget">
+                            <img src="~/img/blog/user-info.png" alt="">
+                            <a href="#"><h4>Charlie Barber</h4></a>
+                            <p>
+                                Senior blog writer
+                            </p>
+                            <ul class="social-links">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-github"></i></a></li>
+                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            </ul>
+                            <p>
+                                Boot camps have its supporters andit sdetractors. Some people do not understand why you should have to spend money on boot
+                                camp when you can get. Boot camps have itssuppor ters andits detractors.
+                            </p>
+                        </div>
+                        <div class="single-sidebar-widget popular-post-widget">
+                            <h4 class="popular-title">Popular Posts</h4>
+                            <div class="popular-post-list">
+                                <div class="single-post-list d-flex flex-row align-items-center">
+                                    <div class="thumb">
+                                        <img class="img-fluid" src="~/img/blog/pp1.jpg" alt="">
+                                    </div>
+                                    <div class="details">
+                                        <a href="blog-single.html"><h6>Space The Final Frontier</h6></a>
+                                        <p>02 Hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="single-post-list d-flex flex-row align-items-center">
+                                    <div class="thumb">
+                                        <img class="img-fluid" src="~/img/blog/pp2.jpg" alt="">
+                                    </div>
+                                    <div class="details">
+                                        <a href="blog-single.html"><h6>The Amazing Hubble</h6></a>
+                                        <p>02 Hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="single-post-list d-flex flex-row align-items-center">
+                                    <div class="thumb">
+                                        <img class="img-fluid" src="~/img/blog/pp3.jpg" alt="">
+                                    </div>
+                                    <div class="details">
+                                        <a href="blog-single.html"><h6>Astronomy Or Astrology</h6></a>
+                                        <p>02 Hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="single-post-list d-flex flex-row align-items-center">
+                                    <div class="thumb">
+                                        <img class="img-fluid" src="~/img/blog/pp4.jpg" alt="">
+                                    </div>
+                                    <div class="details">
+                                        <a href="blog-single.html"><h6>Asteroids telescope</h6></a>
+                                        <p>02 Hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-sidebar-widget ads-widget">
+                            @*<a href="#"><img class="img-fluid" src="~/img/blog/ads-banner.jpg" alt=""></a>*@
+                        </div>
+                        <div class="single-sidebar-widget post-category-widget">
+                            <h4 class="category-title">Post Catgories</h4>
+                            <ul class="cat-list">
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Technology</p>
+                                        <p>37</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Lifestyle</p>
+                                        <p>24</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Fashion</p>
+                                        <p>59</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Art</p>
+                                        <p>29</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Food</p>
+                                        <p>15</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Architecture</p>
+                                        <p>09</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Adventure</p>
+                                        <p>44</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="single-sidebar-widget newsletter-widget">
+                            <h4 class="newsletter-title">Newsletter</h4>
+                            <p>
+                                Here, I focus on a range of items and features that we use in life without giving them a second thought.
+                            </p>
+                            <div class="form-group d-flex flex-row">
+                                <div class="col-autos">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email" onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = 'Enter email'">
+                                    </div>
+                                </div>
+                                <a href="#" class="bbtns">Subcribe</a>
+                            </div>
+                            <p class="text-bottom">
+                                You can unsubscribe at any time
+                            </p>
+                        </div>
+                        <div class="single-sidebar-widget tag-cloud-widget">
+                            <h4 class="tagcloud-title">Tag Clouds</h4>
+                            <ul>
+                                <li><a href="#">Technology</a></li>
+                                <li><a href="#">Fashion</a></li>
+                                <li><a href="#">Architecture</a></li>
+                                <li><a href="#">Fashion</a></li>
+                                <li><a href="#">Food</a></li>
+                                <li><a href="#">Technology</a></li>
+                                <li><a href="#">Lifestyle</a></li>
+                                <li><a href="#">Art</a></li>
+                                <li><a href="#">Adventure</a></li>
+                                <li><a href="#">Food</a></li>
+                                <li><a href="#">Lifestyle</a></li>
+                                <li><a href="#">Adventure</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <p>
-                        La arquitectura moderna tuvo sus inicios en Francia y es la combinación de estilos y corrientes de arquitectura que se han desarrollado en todo el mundo desde el siglo XX. Le Corbusier, uno de los arquitectos más influyentes, Walter Gropius, Alvar Aalto y Ludwig Mies van der Rohe son los máximos exponentes de este movimiento arquitectónico.
-                        Se caracteriza por la simplificación de formas, la ausencia de ornamento y la estética de distintas tendencias del arte moderno, como son el cubismo, expresionismo, futurismo, entre algunas otras.
-                    </p>
-                    <p>La utilización de vitrales y grandes ventanales, es otra característica fundamental de este tipo de arquitectura. Esto lo podemos ver en la Ópera de Sydney, en Australia, donde se llevan a cabo los conciertos de ópera, ballet y teatro más prestigiosos del mundo.</p>
-                    <a class="btn btn--rightBorder mt-4" href="/Arquitectura/About">Leer más</a>
                 </div>
             </div>
         </div>
-        <!--================ End Sobre la compañia=================-->
-        <hr />
-        <!--================ Sección de logros=================-->
-        <section class="overview">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
-                        <div class="media align-items-center overview__single">
-                            <span class="overview__single__icon"><i class="ti-crown"></i></span>
-                            <div class="media-body">
-                                <h3>286+</h3>
-                                <p>Projectos realizados</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
-                        <div class="media align-items-center overview__single">
-                            <span class="overview__single__icon"><i class="ti-face-smile"></i></span>
-                            <div class="media-body">
-                                <h3>942+</h3>
-                                <p>Clientes satisfechos</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
-                        <div class="media align-items-center overview__single">
-                            <span class="overview__single__icon"><i class="ti-user"></i></span>
-                            <div class="media-body">
-                                <h3>263+</h3>
-                                <p>Profesionales</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
-                        <div class="media align-items-center overview__single">
-                            <span class="overview__single__icon"><i class="ti-gift"></i></span>
-                            <div class="media-body">
-                                <h3>2000+</h3>
-                                <p>Tazas de café</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--================ End Sección de logros=================-->
     </section>
+    <!-- End post-content Area -->
+    <!-- start footer Area -->
+    <!-- Modal agregar proyecto -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <form method="post" ng-submit="bc.AddBlog(bc.blog)" enctype="multipart/form-data">
+                    <div class="modal-header" style="background-color: aquamarine; color: darkslategrey;">
+                        <h5 class="modal-title" id="exampleModalLabel">.:Agregar Blog:.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="background-color:  lightseagreen; color: black;">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                Nombre de Blog:
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" required ng-model="bc.blog.nombre_blog" name="nombre_blog" value="" />
+                                    <input type="hidden" name="id_blog" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                Titulo:
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" required ng-model="bc.blog.titulo_blog" name="titulo_blog" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                Descripción:
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" required ng-model="bc.blog.desc_blog" name="desc_blog" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                Fecha:
+                                <div class="col-md-10">
+                                    <input type="date" class="form-control" name="fecha_blog" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                Vistas:
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" required ng-model="bc.blog.vistas_blog" name="vistas_blog" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                Comentarios:
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" required ng-model="bc.blog.comen_blog" name="comen_blog" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                Imagen:
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control" required ng-model="bc.blog.img_blog" name="imgageBlog" value="" />
+                                    <input type="hidden" name="img_blog" value="" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer" style="background-color: lightslategrey;">
+                        <button id="btnSave" class="btn" style="background-color: black; color: white;">Guardar</button>
+                        <button type="button" class="ti-close btn-danger p-2" data-dismiss="modal"> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.7.8/i18n/angular-locale_es-mx.js"></script>
+    <script>
+                //$('#btnSave').on('click', function () {
+                //    'use strict'
+                //    var data = {
+                //        nombre_blog: $('input[name=nombre_blog]').val(),
+                //        titulo_blog: $('input[name=titulo_blog]').val(),
+                //        desc_blog: $('input[name=desc_blog]').val(),
+                //        fecha_blog: $('input[name=fecha_blog]').val(),
+                //        vistas_blog: $('input[name=vistas_blog]').val(),
+                //        comen_blog: $('input[name=comen_blog]').val(),
+                //        imgageBlog: $('input[name=imgageBlog]').val()
+                //    };
+                //    console.log('Data:', data);
+                //    $.ajax({
+                //        type: "POST",
+                //        url: '/Arquitectura/CreateB',
+                //        data: data,
+                //        dataType: 'application/json',
+                //        success: function (data) {
+                //            console.log(data);
+                //        },
+                //        error: function (error) {
+                //            console.log(error);
+                //        }
+                //    });
+                //});
+    </script>
     <script src="~/Scripts/blogs.js"></script>
 }

@@ -223,6 +223,8 @@ namespace ArquitecturaModerna.Controllers
         [HttpPost, Route(""), BasicAuthorize]
         public HttpResponseMessage PostBlog(Blog blog)
         {
+            blog.fecha_blog = DateTime.Now;
+            blog.img_blog = "img/blog1.jpg";
             Blog blo = new BusGlobal().CreateBlog(blog);
             if (blo != null)
             {
