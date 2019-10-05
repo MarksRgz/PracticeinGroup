@@ -66,15 +66,20 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.Conflict, false);
         }
 
+    }
+
+    [RoutePrefix("api/proyecto")]
+    public class ApiGitProyectoController : ApiController
+    {
         //API PROYECTO
-        [Route("Proyecto"), BasicAuthorize]
+        [Route(""), BasicAuthorize]
         public HttpResponseMessage GetProyectos()
         {
             var lst = new BusGlobal().GetProyectos();
             return Request.CreateResponse(HttpStatusCode.OK, lst);
         }
 
-        [Route("Proyecto"), BasicAuthorize]
+        [Route(""), BasicAuthorize]
         public HttpResponseMessage GetProyecto(int idp)
         {
             var lst = new BusGlobal().GetProyectos();
@@ -86,7 +91,7 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, proye);
         }
 
-        [HttpPut, Route("Proyecto")]
+        [HttpPut, Route("")]
         public HttpResponseMessage PutProyecto(int idp, Proyecto proye)
         {
             int proyecto = new BusGlobal().UpdateProyecto(proye);
@@ -97,10 +102,10 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.NotModified, false);
         }
 
-        [HttpPost, Route("Proyecto"), BasicAuthorize]
+        [HttpPost, Route(""), BasicAuthorize]
         public HttpResponseMessage PostProyecto(Proyecto proye)
         {
-            Proyecto proyecto= new BusGlobal().CreateProyecto(proye);
+            Proyecto proyecto = new BusGlobal().CreateProyecto(proye);
             if (proyecto != null)
             {
                 return Request.CreateResponse(HttpStatusCode.Created, proyecto);
@@ -108,7 +113,7 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, false);
         }
 
-        [HttpDelete, Route("Proyecto")]
+        [HttpDelete, Route("")]
         public HttpResponseMessage DeleteProyecto(int idp)
         {
             int proyecto = new BusGlobal().DeleteProyecto(idp);
@@ -119,19 +124,26 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.Conflict, false);
         }
 
+    }
+
+    [RoutePrefix("api/servicio")]
+    public class ApiGitServicioController : ApiController
+    {
+
+
         //API SERVICIO
-        [Route("Servicio"), BasicAuthorize]
+        [Route(""), BasicAuthorize]
         public HttpResponseMessage GetServicios()
         {
             var lst = new BusGlobal().GetServicios();
             return Request.CreateResponse(HttpStatusCode.OK, lst);
         }
 
-        [Route("Servicio"), BasicAuthorize]
+        [Route(""), BasicAuthorize]
         public HttpResponseMessage GetServicio(int idp)
         {
             var lst = new BusGlobal().GetServicios();
-            Servicio serv= lst.FirstOrDefault(s => s.id_serv == idp);
+            Servicio serv = lst.FirstOrDefault(s => s.id_serv == idp);
             if (serv == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -139,7 +151,7 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, serv);
         }
 
-        [HttpPut, Route("Servicio")]
+        [HttpPut, Route("")]
         public HttpResponseMessage PutServicio(int idp, Servicio serv)
         {
             var servicio = new BusGlobal().UpdateServicio(serv);
@@ -150,18 +162,18 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.NotModified, false);
         }
 
-        [HttpPost, Route("Servicio"), BasicAuthorize]
+        [HttpPost, Route(""), BasicAuthorize]
         public HttpResponseMessage PostServicio(Servicio serv)
         {
-           Servicio servicio= new BusGlobal().CreateServicio(serv);
-            if (servicio!= null)
+            Servicio servicio = new BusGlobal().CreateServicio(serv);
+            if (servicio != null)
             {
                 return Request.CreateResponse(HttpStatusCode.Created, servicio);
             }
             return Request.CreateResponse(HttpStatusCode.OK, false);
         }
 
-        [HttpDelete, Route("Servicio")]
+        [HttpDelete, Route("")]
         public HttpResponseMessage DeleteServicio(int idp)
         {
             int servicio = new BusGlobal().DeleteServicio(idp);
@@ -172,19 +184,24 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.Conflict, false);
         }
 
+    }
+
+    [RoutePrefix("api/blog")]
+    public class ApiGitBlogController : ApiController
+    {
         //API BLOG
-        [Route("Blog"), BasicAuthorize]
+        [Route(""), BasicAuthorize]
         public HttpResponseMessage GetBlogs()
         {
             var lst = new BusGlobal().GetBlogs();
             return Request.CreateResponse(HttpStatusCode.OK, lst);
         }
 
-        [Route("Blog"), BasicAuthorize]
+        [Route(""), BasicAuthorize]
         public HttpResponseMessage GetBlog(int idp)
         {
             var lst = new BusGlobal().GetBlogs();
-            Blog blog= lst.FirstOrDefault(b => b.id_blog == idp);
+            Blog blog = lst.FirstOrDefault(b => b.id_blog == idp);
             if (blog == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -192,7 +209,7 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, blog);
         }
 
-        [HttpPut, Route("Blog")]
+        [HttpPut, Route("")]
         public HttpResponseMessage PutBlog(int idp, Blog blog)
         {
             var blo = new BusGlobal().UpdateBlog(blog);
@@ -203,10 +220,10 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.NotModified, false);
         }
 
-        [HttpPost, Route("Blog"), BasicAuthorize]
+        [HttpPost, Route(""), BasicAuthorize]
         public HttpResponseMessage PostBlog(Blog blog)
         {
-            Blog blo= new BusGlobal().CreateBlog(blog);
+            Blog blo = new BusGlobal().CreateBlog(blog);
             if (blo != null)
             {
                 return Request.CreateResponse(HttpStatusCode.Created, blo);
@@ -214,7 +231,7 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, false);
         }
 
-        [HttpDelete, Route("Blog")]
+        [HttpDelete, Route("")]
         public HttpResponseMessage DeleteBlog(int idp)
         {
             int blog = new BusGlobal().DeleteBlog(idp);

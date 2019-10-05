@@ -348,7 +348,7 @@ namespace Beneficia.BusArquitectura.Buss
             {
                 using (con)
                 {
-                    int filas = con.Execute(("spDeleteTestimonio"), new {id_test = idp }, commandType:CommandType.StoredProcedure);
+                    int filas = con.Execute(("spDeleteTestimonio"), new { id_test = idp }, commandType: CommandType.StoredProcedure);
                     return filas;
                 }
             }

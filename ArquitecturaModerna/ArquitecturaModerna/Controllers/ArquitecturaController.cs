@@ -22,7 +22,6 @@ namespace ArquitecturaModerna.Controllers
                 return RedirectToAction("Login");
             }
         }
-        // GET: Arquitectura
         public ActionResult About()
         {
             List<Testimonio> lst = new BusGlobal().GetTestimonios();
