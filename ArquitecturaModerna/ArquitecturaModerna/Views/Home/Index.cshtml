@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div id="divMain" ng-app="MyAPI" ng-controller="BlogController as bc" ng-init="bc.CargaInicial()">
+    <ul>
+        <li ng-repeat="blog in bc.blogs">
+            {{blog.nombre_blog}}
+        </li>
+    </ul>
+
+    <section class="about section-margin mb-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5">
+                    <div class="about__img text-center text-md-left mb-5 mb-md-0">
+                        <img class="img-fluid" src="~/img/about.png" alt="">
+                        <a href="/Arquitectura/About" class="about__img__date text-center">
+                            <h3>26</h3>
+                            <p>Años <br> de Creatividad</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-7 pl-xl-5">
+                    <div class="section-intro">
+                        <h4 class="section-intro__title">sobre nuestra compañia</h4>
+                        <h2 class="section-intro__subtitle">Hemos estado creando <br> algo impresionante desde 1992</h2>
+                    </div>
+                    <p>
+                        La arquitectura moderna tuvo sus inicios en Francia y es la combinación de estilos y corrientes de arquitectura que se han desarrollado en todo el mundo desde el siglo XX. Le Corbusier, uno de los arquitectos más influyentes, Walter Gropius, Alvar Aalto y Ludwig Mies van der Rohe son los máximos exponentes de este movimiento arquitectónico.
+                        Se caracteriza por la simplificación de formas, la ausencia de ornamento y la estética de distintas tendencias del arte moderno, como son el cubismo, expresionismo, futurismo, entre algunas otras.
+                    </p>
+                    <p>La utilización de vitrales y grandes ventanales, es otra característica fundamental de este tipo de arquitectura. Esto lo podemos ver en la Ópera de Sydney, en Australia, donde se llevan a cabo los conciertos de ópera, ballet y teatro más prestigiosos del mundo.</p>
+                    <a class="btn btn--rightBorder mt-4" href="/Arquitectura/About">Leer más</a>
+                </div>
+            </div>
+        </div>
+        <!--================ End Sobre la compañia=================-->
+        <hr />
+        <!--================ Sección de logros=================-->
+        <section class="overview">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
+                        <div class="media align-items-center overview__single">
+                            <span class="overview__single__icon"><i class="ti-crown"></i></span>
+                            <div class="media-body">
+                                <h3>286+</h3>
+                                <p>Projectos realizados</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
+                        <div class="media align-items-center overview__single">
+                            <span class="overview__single__icon"><i class="ti-face-smile"></i></span>
+                            <div class="media-body">
+                                <h3>942+</h3>
+                                <p>Clientes satisfechos</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
+                        <div class="media align-items-center overview__single">
+                            <span class="overview__single__icon"><i class="ti-user"></i></span>
+                            <div class="media-body">
+                                <h3>263+</h3>
+                                <p>Profesionales</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
+                        <div class="media align-items-center overview__single">
+                            <span class="overview__single__icon"><i class="ti-gift"></i></span>
+                            <div class="media-body">
+                                <h3>2000+</h3>
+                                <p>Tazas de café</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================ End Sección de logros=================-->
+    </section>
+</div>
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.7.8/i18n/angular-locale_es-mx.js"></script>
+    <script src="~/Scripts/blogs.js"></script>
+}
