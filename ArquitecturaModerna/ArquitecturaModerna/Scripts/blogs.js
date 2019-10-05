@@ -69,6 +69,7 @@ var url = location.origin + '/api/blog';
                         data: blog
                     }).then(function (response) {
                         console.log(response);
+                        $scope.blogs = $scope.blogs.filter(f => f.id_blog !== blog.id_blog);
                         $scope.blog = {};
                         $('#exampleModal').modal('hide');
                     }, function (error) {
