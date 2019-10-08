@@ -279,8 +279,9 @@
                             <div class="form-group col-12">
                                 Imagen:
                                 <div class="col-md-10">
-                                    <input type="file" class="form-control" required ng-model="bc.blog.img_blog" name="imgageBlog" value="" />
-                                    <input type="hidden" name="img_blog" value="" />
+                                    Profile Picture: <input type="file" id="newPhotos" class="uploadFile" accept="image/*" ngf-select ng-model="bc.files" ngf-multiple="true">
+                                    @*<input type="file" class="form-control" required ng-model="bc.blog.img_blog" name="imgageBlog" value="" />*@
+                                    @*<input type="hidden" name="img_blog" value="" />*@
                                 </div>
                             </div>
 
@@ -289,7 +290,6 @@
                     </div>
                     <div class="modal-footer" style="background-color: lightslategrey;">
                         <button id="btnSave" class="btn" style="background-color: black; color: white;">Guardar</button>
-                        <button id="btnDelete" ng-click="bc.DeleteBlog(bc.blog)" class="btn" style="background-color: red;" color: black;>Eliminar</button>
                         <button type="button" class="ti-close btn-danger p-2" data-dismiss="modal"> Close</button>
                     </div>
                 </form>
@@ -300,32 +300,34 @@
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.7.8/i18n/angular-locale_es-mx.js"></script>
+    <script src="~/Scripts/ng-file-upload-shim.js"></script>
+    <script src="~/Scripts/ng-file-upload.js"></script>
     <script>
-                //$('#btnSave').on('click', function () {
-                //    'use strict'
-                //    var data = {
-                //        nombre_blog: $('input[name=nombre_blog]').val(),
-                //        titulo_blog: $('input[name=titulo_blog]').val(),
-                //        desc_blog: $('input[name=desc_blog]').val(),
-                //        fecha_blog: $('input[name=fecha_blog]').val(),
-                //        vistas_blog: $('input[name=vistas_blog]').val(),
-                //        comen_blog: $('input[name=comen_blog]').val(),
-                //        imgageBlog: $('input[name=imgageBlog]').val()
-                //    };
-                //    console.log('Data:', data);
-                //    $.ajax({
-                //        type: "POST",
-                //        url: '/Arquitectura/CreateB',
-                //        data: data,
-                //        dataType: 'application/json',
-                //        success: function (data) {
-                //            console.log(data);
-                //        },
-                //        error: function (error) {
-                //            console.log(error);
-                //        }
-                //    });
-                //});
+       //$('#btnSave').on('click', function () {
+       //    'use strict'
+       //    var data = {
+       //        nombre_blog: $('input[name=nombre_blog]').val(),
+       //        titulo_blog: $('input[name=titulo_blog]').val(),
+       //        desc_blog: $('input[name=desc_blog]').val(),
+       //        fecha_blog: $('input[name=fecha_blog]').val(),
+       //        vistas_blog: $('input[name=vistas_blog]').val(),
+       //        comen_blog: $('input[name=comen_blog]').val(),
+       //        imgageBlog: $('input[name=imgageBlog]').val()
+       //    };
+       //    console.log('Data:', data);
+       //    $.ajax({
+       //        type: "POST",
+       //        url: '/Arquitectura/CreateB',
+       //        data: data,
+       //        dataType: 'application/json',
+       //        success: function (data) {
+       //            console.log(data);
+       //        },
+       //        error: function (error) {
+       //            console.log(error);
+       //        }
+       //    });
+       //});
     </script>
     <script src="~/Scripts/blogs.js"></script>
 }

@@ -1,10 +1,15 @@
 ﻿using ArquitecturaModerna.Module;
+using AspNetWebApi.Extensions;
 using Beneficia.BusArquitectura.Buss;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace ArquitecturaModerna.Controllers
@@ -189,6 +194,7 @@ namespace ArquitecturaModerna.Controllers
     [RoutePrefix("api/blog")]
     public class ApiGitBlogController : ApiController
     {
+        private readonly string workingFolder = HttpRuntime.AppDomainAppPath + @"\img";
         //API BLOG
         [Route(""), BasicAuthorize]
         public HttpResponseMessage GetBlogs()
@@ -220,17 +226,54 @@ namespace ArquitecturaModerna.Controllers
             return Request.CreateResponse(HttpStatusCode.NotModified, false);
         }
 
-        [HttpPost, Route(""), BasicAuthorize]
-        public HttpResponseMessage PostBlog(Blog blog)
+        [HttpPost, Route("new")]
+        public async Task<IHttpActionResult> Add(Blog blog)
         {
-            blog.fecha_blog = DateTime.Now;
-            blog.img_blog = "img/blog1.jpg";
-            Blog blo = new BusGlobal().CreateBlog(blog);
-            if (blo != null)
+            try
             {
-                return Request.CreateResponse(HttpStatusCode.Created, blo);
+                blog.fecha_blog = DateTime.Now;
+                Blog newBlog = new BusGlobal().CreateBlog(blog);
+                return Ok(new { newBlog });
             }
-            return Request.CreateResponse(HttpStatusCode.OK, false);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.GetBaseException().Message);
+            }
+        }
+
+        [HttpPost, Route("")]
+        public async Task<HttpResponseMessage> PostBlog()
+        {
+            {
+                // Check if the request contains multipart/form-data.
+                if (!Request.Content.IsMimeMultipartContent("form-data"))
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Unsupported media type");
+                }
+                try
+                {
+                    var provider = new CustomMultipartFormDataStreamProvider(workingFolder);
+                    //await Request.Content.ReadAsMultipartAsync(provider);
+                    await Task.Run(async () => await Request.Content.ReadAsMultipartAsync(provider));
+
+                    //                    var photos = new List<PhotoViewModel>();
+
+                    foreach (var file in provider.FileData)
+                    {
+                        var fi = new FileInfo(file.LocalFileName);
+                    }
+
+                    //foreach (var item in provider.Contents)
+                    //{
+                    //    var atributo = item;
+                    //}
+                    return Request.CreateResponse(HttpStatusCode.OK, new { message = "OK" });
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+            }
         }
 
         [HttpDelete, Route("")]

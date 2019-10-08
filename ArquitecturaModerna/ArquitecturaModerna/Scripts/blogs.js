@@ -3,11 +3,12 @@
 var url = location.origin + '/api/blog';
 (function () {
     angular
-        .module("MyAPI", [])
-        .controller("BlogController", ['$http', function ($http) {
+        .module("MyAPI", ["ngFileUpload"])
+        .controller("BlogController", ['$http', 'Upload', function ($http, Upload) {
             var $scope = this;
             $scope.blogs = [];
             $scope.blog = {};
+            $scope.files = {};
 
             $scope.CargaInicial = function () {
                 $http({
@@ -25,20 +26,29 @@ var url = location.origin + '/api/blog';
 
             $scope.AddBlog = function (blog) {
                 if (blog.id_blog === undefined) {
-                    console.log("Blog de Alta :", blog);
-                    $http({
-                        url: url,
-                        method: "POST",
-                        headers: { Authorization: 'Basic U3VibmV0OjY3ODk=' },
-                        data: blog
+                    console.log("Blog de Alta :");
+                    blog.img_blog = 'img/' + $scope.files[0].name;
+                    Upload.upload({
+                        url: '/api/blog',
+                        data: { file: $scope.files }
                     }).then(function (response) {
-                        console.log(response);
-                        $scope.blogs.push(response.data);
-                        $scope.blog = {};
-                        $('#exampleModal').modal('hide');
-                        $('#btnDelete').hide();
-                    }, function (error) {
-                        console.log(error);
+                        $http({
+                            url: url + "/new",
+                            method: "POST",
+                            headers: { 'Authorization': 'Basic U3VibmV0OjY3ODk=', 'ContentType': 'application/json' },
+                            data: blog
+                        }).then(function (response) {
+                            console.log(response);
+                            $scope.blogs.push(response.data);
+                            $scope.blog = {};
+                            $('#exampleModal').modal('hide');
+                            $('#btnDelete').hide();
+                        }, function (error) {
+                            console.log(error);
+                        });
+                    }, function (err) {
+                        console.log("Error status: " + err.status);
+                        console.log("Error de foto: ", err);
                     });
                 } else {
 
@@ -59,6 +69,7 @@ var url = location.origin + '/api/blog';
                 }
 
             };
+
             $scope.DeleteBlog = function (blog) {
                 if (blog.id_blog !== '') {
                     console.log('Blog a eliminar');
