@@ -39,7 +39,7 @@ var url = location.origin + '/api/blog';
                             data: blog
                         }).then(function (response) {
                             console.log(response);
-                            $scope.blogs.push(response.data);
+                            $scope.blogs.push(response.data.newBlog);
                             $scope.blog = {};
                             $('#exampleModal').modal('hide');
                             $('#btnDelete').hide();
